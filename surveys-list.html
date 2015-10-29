@@ -1,4 +1,4 @@
-<link rel="import" href="surveys-item.html">
+<link rel="import" href="survey-item.html">
 <link rel="import" href="../sortable-list/sortable-list.html">
 <!--
 `<surveys-list surveys="{{surveys}}" on-delete-surveys="deleteSurvey"></surveys-list>`
@@ -10,7 +10,7 @@
     </template>
     <sortable-list>
       <template is="dom-repeat" items="{{surveys}}">
-        <div style="display:inline-block"><surveys-item style="display: inline-block" survey="{{item}}"></surveys-item></div>
+        <div style="display:inline-block"><survey-item style="display: inline-block" survey="{{item}}"></survey-item></div>
       </template>
     </sortable-list>
   </template>
