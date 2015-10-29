@@ -1,7 +1,6 @@
 <link rel="import" href="../paper-dialog/paper-dialog.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-input/paper-input.html">
-<link rel="import" href="../paper-checkbox/paper-checkbox.html">
 <!-- 
 `<survey-input on-add-badge="addSurvey"></survey-input>`
 -->
@@ -9,7 +8,7 @@
   <template>
     <paper-button on-tap="add">Add</paper-button>
     <paper-dialog>
-      <paper-input value="{{surveyQ::change}}" label="Q"></paper-input>
+      <paper-input value="{{surveyQ::change}}" label="Question"></paper-input>
       <paper-button on-tap="_add">Add</paper-button>
     </paper-dialog>
   </template>
@@ -24,8 +23,8 @@
       }
     },
     _add: function() {
-      if (this.badgeTitle && this.badgeSubtitle) {
-        this.fire('add-survey-question', {
+      if (this.surveyQ) {
+        this.fire('add-survey', {
           Q: this.surveyQ
         });
         this.surveyQ = null;
