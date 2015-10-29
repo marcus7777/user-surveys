@@ -4,9 +4,11 @@
 -->
 <dom-module id="survey-item">
   <template>
-    <p>{{survey.question}}</p>
-    <paper-button on-tap="yes">Yes</paper-button>
-    <paper-button on-tap="no">No</paper-button>
+    Q:<b>{{survey.question}}</b>
+    <template is="dom-if" if="{{answer}}">
+      <paper-button on-tap="yes">Yes</paper-button>
+      <paper-button on-tap="no">No</paper-button>
+    </template>
   </template>
 </dom-module>
 <script>
@@ -16,12 +18,15 @@
       this.fire('delete-survey-question', {survey: this.survey});
     },
     yes: function() {
-      this.item.answer = "Yes"
-      this.item.isComplete = true
+      this.survey.answer = "Yes"
+      this.survey.isComplete = true
     },
     no: function() {
-      this.item.answer = "No"
-      this.item.isComplete = true
+      this.survey.answer = "No"
+      this.survey.isComplete = true
+    },
+    properties: {
+      survey:{notify:true}
     }
   });
 </script>
