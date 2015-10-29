@@ -9,8 +9,8 @@
       <p>No Surveys</p>
     </template>
     <sortable-list>
-      <template is="dom-repeat" items="{{surveys}}">
-        <div style="display:inline-block"><survey-item style="display: inline-block" survey="{{item}}"></survey-item></div>
+      <template is="dom-repeat" items="{{surveys}}" >
+        <div style="display:block"><survey-item answer="[[answer]]" survey="{{item}}"></survey-item></div>
       </template>
     </sortable-list>
   </template>
