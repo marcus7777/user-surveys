@@ -4,11 +4,9 @@
 -->
 <dom-module id="survey-item">
   <template>
-    <paper-material style="background: #fff; padding: 20px; margin: 5px;" class="row layout center">
-      <p>{{survey.Q}}</p>
-      <paper-button on-tap="yes">Yes</paper-button>
-      <paper-button on-tap="on">No</paper-button>
-    </paper-material>
+    <p>{{survey.question}}</p>
+    <paper-button on-tap="yes">Yes</paper-button>
+    <paper-button on-tap="no">No</paper-button>
   </template>
 </dom-module>
 <script>
