@@ -15,7 +15,7 @@
   Polymer({
     is: 'survey-item',
     _onDelete: function() {
-      this.fire('delete-survey-', {survey: this.survey});
+      this.fire('delete-survey-question', {survey: this.survey});
     },
     yes: function() {
       this.item.answer = "Yes"
