@@ -13,8 +13,8 @@
     <div class="content">
       <surveys-sm-list hidden="{{admin}}" on-tap="toggleView" surveys="{{surveys}}" on-delete-survey="deleteSurveyQuestion"></badge-sm-list>
       <template is="dom-if" if="{{admin}}">
-        <surveys-list badges="{{badges}}" on-delete-survey="deleteSurveyQuestion"></surveys-list>
-        <surveys-input on-add-badge="addBadge"></surveys-input>
+        <surveys-list badges="{{surveys}}" on-delete-survey="deleteSurveyQuestion"></surveys-list>
+        <surveys-input on-add-badge="addSurveyQuestion"></surveys-input>
         <paper-button raised on-tap="toggleView" >Done</paper-button>
       </template>
     </div>
