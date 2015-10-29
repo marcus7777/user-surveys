@@ -1,0 +1,29 @@
+<link rel="import" href="../paper-button/paper-button.html">
+<!--
+`<survey-item style="display:block" survey="{{item}}"></survey-item>`
+-->
+<dom-module id="survey-item">
+  <template>
+    <paper-material style="background: #fff; padding: 20px; margin: 5px;" class="row layout center">
+      <p>{{survey.Q}}</p>
+      <paper-button on-tap="yes">Yes</paper-button>
+      <paper-button on-tap="on">No</paper-button>
+    </paper-material>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: 'survey-item',
+    _onDelete: function() {
+      this.fire('delete-survey-', {survey: this.survey});
+    },
+    yes: function() {
+      this.item.answer = "Yes"
+      this.item.isComplete = true
+    },
+    no: function() {
+      this.item.answer = "No"
+      this.item.isComplete = true
+    }
+  });
+</script>
