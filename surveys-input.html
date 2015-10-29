@@ -26,7 +26,7 @@
     _add: function() {
       if (this.badgeTitle && this.badgeSubtitle) {
         this.fire('add-survey-question', {
-          title: this.surveyQ,
+          Q: this.surveyQ
         });
         this.surveyQ = null;
         this.$$('paper-dialog').close();
