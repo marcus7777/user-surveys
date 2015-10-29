@@ -9,7 +9,7 @@
     <surveys-view answer="[[answer]]" location="[[location]]" edit="{{edit}}" folder="[[surveysFolder]]" default-folder="{{surveysDefaultFolder}}" edit-default="{{editDefault}}"></surveys-view>
     <template is="dom-if" if="{{editDefault}}">
       <h3>Edit Default Set:</h3>
-      <user-surveys edit location="[[location]]" folder="[[defaultFolder]]"></user-surveys>
+      <user-surveys edit location="[[location]]" filter-by="all" folder="[[defaultFolder]]"></user-surveys>
     </template>
   </template>
 </dom-module>
