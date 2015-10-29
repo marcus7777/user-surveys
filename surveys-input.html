@@ -7,7 +7,7 @@
 -->
 <dom-module id="survey-input">
   <template>
-    <iron-icon icon="add" on-tap="add"></iron-icon>
+    <paper-button on-tap="add">Add</paper-button>
     <paper-dialog>
       <paper-input value="{{surveyQ::change}}" label="Q"></paper-input>
       <paper-button on-tap="_add">Add</paper-button>
