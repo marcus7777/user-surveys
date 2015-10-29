@@ -1,4 +1,5 @@
 <link rel="import" href="../sortable-list/sortable-list.html">
+<link rel="import" href="surveys-view.html">
 <!--
 `<user-surveys>` Surveys for users 
 @demo demo.html
@@ -6,11 +7,29 @@
 
 <dom-module id="user-surveys">
   <template>
-
+    <surveys-view location="[[location]]" edit="{{edit}}" folder="[[surveysFolder]]" default-folder="{{surveysDefaultFolder}}" edit-default="{{editDefault}}"></badge-view>
+    <template is="dom-if" if="{{editDefault}}">
+      <h1>Edit default set:</h1>
+      <user-surveys edit="true" location="{{location}}" folder="{{defaultFolder}}"></user-surveys>
+    </template>
   </template>
 </dom-module>
 <script>
   Polymer({
     is: "user-surveys"
+    properties: {
+      folder: String,
+      defaultFolder: {type:String,value:"default"},
+      edit: Boolean,
+      editDefault: Boolean,
+      badgesFolder: {computed:"getBadgesFolder(folder)"},
+      badgesDefaultFolder: {computed:"getBadgesDefaultFolder(defaultFolder)"}
+    },
+    getBadgesFolder: function(folder) {
+      return folder+"/badges"
+    },
+    getBadgesDefaultFolder: function(defaultFolder) {
+      return defaultFolder+"/badges"
+    }
   });
 </script>
