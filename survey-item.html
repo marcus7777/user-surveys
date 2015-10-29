@@ -18,12 +18,12 @@
       this.fire('delete-survey-question', {survey: this.survey});
     },
     yes: function() {
-      this.survey.answer = "Yes"
-      this.survey.isComplete = true
+      this.set("survey.answer", "Yes")
+      this.set("survey.isComplete", true)
     },
     no: function() {
-      this.survey.answer = "No"
-      this.survey.isComplete = true
+      this.set("survey.answer", "No")
+      this.set("survey.isComplete", true)
     },
     properties: {
       survey:{notify:true}
