@@ -1,4 +1,3 @@
-<link rel="import" href="../sortable-list/sortable-list.html">
 <link rel="import" href="surveys-view.html">
 <!--
 `<user-surveys>` Surveys for users 
@@ -7,7 +6,7 @@
 
 <dom-module id="user-surveys">
   <template>
-    <surveys-view location="[[location]]" edit="{{edit}}" folder="[[surveysFolder]]" default-folder="{{surveysDefaultFolder}}" edit-default="{{editDefault}}"></badge-view>
+    <surveys-view location="[[location]]" edit="{{edit}}" folder="[[surveysFolder]]" default-folder="{{surveysDefaultFolder}}" edit-default="{{editDefault}}"></surveys-view>
     <template is="dom-if" if="{{editDefault}}">
       <h1>Edit default set:</h1>
       <user-surveys edit="true" location="{{location}}" folder="{{defaultFolder}}"></user-surveys>
@@ -22,14 +21,14 @@
       defaultFolder: {type:String,value:"default"},
       edit: Boolean,
       editDefault: Boolean,
-      badgesFolder: {computed:"getBadgesFolder(folder)"},
-      badgesDefaultFolder: {computed:"getBadgesDefaultFolder(defaultFolder)"}
+      surveysFolder: {computed:"getSurveysFolder(folder)"},
+      surveysDefaultFolder: {computed:"getSurveysDefaultFolder(defaultFolder)"}
     },
-    getBadgesFolder: function(folder) {
-      return folder+"/badges"
+    getSurveysFolder: function(folder) {
+      return folder+"/surveys"
     },
-    getBadgesDefaultFolder: function(defaultFolder) {
-      return defaultFolder+"/badges"
+    getSurveysDefaultFolder: function(defaultFolder) {
+      return defaultFolder+"/surveys"
     }
   });
 </script>
