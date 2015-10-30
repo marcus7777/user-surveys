@@ -8,7 +8,9 @@
 <dom-module id="survey-item">
   <template>
     <template is="dom-if" if="{{!index}}">
-       <show-once message="{{q}}" link="" link-text=""></show-once> 
+      <template is="dom-if" if="{{q}}">
+        <show-once message="{{q}}" link="" link-text=""></show-once>
+      </template>
     </template>
     <template is="dom-if" if="{{edit}}">
       <paper-input value="{{survey.question::change}}" label="Question"></paper-input>
@@ -41,7 +43,8 @@
       q: {computed:'getQ(survey.question)'}
     },
     getQ: function(question) {
-      return "Q:<b>"+question+"</b><paper-button on-tap=\"alert(\"hi\")\">Yes</paper-button><paper-button on-tap=\"no\">No</paper-button>"
+      
+      return "Q:<b>"+question+"</b><paper-button on-tap=\"alert(\'hi\')\">Yes</paper-button><paper-button on-tap=\"no\">No</paper-button>"
     }
   });
 </script>
