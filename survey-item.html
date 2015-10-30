@@ -44,7 +44,7 @@
     },
     getQ: function(question) {
       if (question && !this.edit && this.answer) {
-        return "Q: <b>"+question+"</b><paper-button on-tap=\"alert(\'hi\')\">Yes</paper-button><paper-button on-tap=\"no\">No</paper-button>"
+        return "Q: "+question+"<paper-button on-tap=\"alert(\'hi\')\">Yes</paper-button><paper-button on-tap=\"no\">No</paper-button>"
       }
     }
   });
