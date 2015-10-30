@@ -38,10 +38,10 @@
     },
     properties: {
       survey: {notify:true},
-      q: {computed:"getQ"},
+      q: {computed:'getQ(survey.question)'}
     },
-    getQ: function() {
-      return "Q:<b>"+this.survey.question+"</b><paper-button on-tap="yes">Yes</paper-button><paper-button on-tap="no">No</paper-button>"
+    getQ: function(question) {
+      return "Q:<b>"+question+"</b><paper-button on-tap="yes">Yes</paper-button><paper-button on-tap="no">No</paper-button>"
     }
   });
 </script>
