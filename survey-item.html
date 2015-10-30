@@ -4,7 +4,12 @@
 -->
 <dom-module id="survey-item">
   <template>
-    Q:<b>{{survey.question}}</b>
+    <template is="dom-if" if="{{edit}}">
+      <paper-input value="{{survey.question::change}}" label="Question"></paper-input>
+    </template>
+    <template is="dom-if" if="{{!edit}}">
+      Q:<b>{{survey.question}}</b>
+    </template>
     <template is="dom-if" if="{{answer}}">
       <paper-button on-tap="yes">Yes</paper-button>
       <paper-button on-tap="no">No</paper-button>
