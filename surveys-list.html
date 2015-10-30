@@ -32,9 +32,9 @@
         }
         
         // Handle 'completed', or its inverse, 'active'
-        var ifComplete = (filterBy === 'completed');
+        var ifNotComplete = !(filterBy === 'completed');
         return function(item) {
-          return item.isComplete === ifComplete;
+          return item.isComplete !== ifNotComplete;
         };
       }
     }
