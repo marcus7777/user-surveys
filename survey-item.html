@@ -5,6 +5,9 @@
 -->
 <dom-module id="survey-item">
   <template>
+    <template is="dom-if" if="{{!index}}">
+      hi
+    </template>
     <template is="dom-if" if="{{edit}}">
       <paper-input value="{{survey.question::change}}" label="Question"></paper-input>
     </template>
