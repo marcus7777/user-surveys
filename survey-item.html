@@ -8,7 +8,7 @@
 <dom-module id="survey-item">
   <template>
     <template is="dom-if" if="{{!index}}">
-       <show-once message="Show this once" link="" link-text=""></show-once> 
+       <show-once message="{{q}}" link="" link-text=""></show-once> 
     </template>
     <template is="dom-if" if="{{edit}}">
       <paper-input value="{{survey.question::change}}" label="Question"></paper-input>
@@ -37,7 +37,11 @@
       this.set("survey.isComplete", true)
     },
     properties: {
-      survey:{notify:true}
+      survey: {notify:true},
+      q: {computed:"getQ"},
+    },
+    getQ: function() {
+      return "Q:<b>"+this.survey.question+"</b><paper-button on-tap="yes">Yes</paper-button><paper-button on-tap="no">No</paper-button>"
     }
   });
 </script>
