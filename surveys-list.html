@@ -10,7 +10,7 @@
     </template>
     <sortable-list>
       <template is="dom-repeat" items="{{surveys}}" filter="{{filterSurvey(filterBy)}}">
-        <div style="display:block"><survey-item answer="[[answer]]" survey="{{item}}"></survey-item></div>
+        <div><survey-item answer="[[answer]]" edit="[[edit]]" survey="{{item}}"></survey-item></div>
       </template>
     </sortable-list>
   </template>
