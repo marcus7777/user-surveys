@@ -43,8 +43,9 @@
       q: {computed:'getQ(survey.question)'}
     },
     getQ: function(question) {
-      
-      return "Q:<b>"+question+"</b><paper-button on-tap=\"alert(\'hi\')\">Yes</paper-button><paper-button on-tap=\"no\">No</paper-button>"
+      if (question && !this.edit && this.answer) {
+        return "Q: <b>"+question+"</b><paper-button on-tap=\"alert(\'hi\')\">Yes</paper-button><paper-button on-tap=\"no\">No</paper-button>"
+      }
     }
   });
 </script>
