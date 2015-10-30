@@ -1,12 +1,13 @@
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-input/paper-input.html">
 <!--
 `<survey-item style="display:block" survey="{{item}}"></survey-item>`
 -->
 <dom-module id="survey-item">
   <template>
     <template is="dom-if" if="{{!index}}">
-      hi
+       <show-once message="Show this once" link="" link-text=""></show-once> 
     </template>
     <template is="dom-if" if="{{edit}}">
       <paper-input value="{{survey.question::change}}" label="Question"></paper-input>
