@@ -15,10 +15,8 @@
     <template is="dom-if" if="{{edit}}">
       <paper-input value="{{survey.question::change}}" label="Question"></paper-input>
     </template>
-    <template is="dom-if" if="{{!edit}}">
-      Q:<b>{{survey.question}}</b>
-    </template>
     <template is="dom-if" if="{{answer}}">
+      Q:<b>{{survey.question}}</b>
       <paper-button on-tap="yes">Yes</paper-button>
       <paper-button on-tap="no">No</paper-button>
     </template>
