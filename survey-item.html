@@ -8,7 +8,7 @@
 <dom-module id="survey-item">
   <template>
     <template is="dom-if" if="{{!index}}"><!-- if index === 0 --> 
-      <template is="dom-if" if="{{q}}">
+      <template is="dom-if" if="{{showOnce}}">
         <show-once>
           Q:<b>{{survey.question}}</b>
           <paper-button on-tap="yes">Yes</paper-button>
@@ -42,6 +42,10 @@
     },
     properties: {
       survey: {notify:true}
+      showOnce:{computed:"getShowOnce(question, edit, answer)"}
+    },
+    getShowOnce(question, edit, answer) {
+      return (question && !edit && answer) 
     }
   });
 </script>
