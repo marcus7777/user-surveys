@@ -7,9 +7,13 @@
 -->
 <dom-module id="survey-item">
   <template>
-    <template is="dom-if" if="{{!index}}">
+    <template is="dom-if" if="{{!index}}"><!-- if index === 0 --> 
       <template is="dom-if" if="{{q}}">
-        <show-once message="{{q}}" link="" link-text=""></show-once>
+        <show-once>
+          Q:<b>{{survey.question}}</b>
+          <paper-button on-tap="yes">Yes</paper-button>
+          <paper-button on-tap="no">No</paper-button>
+        </show-once>
       </template>
     </template>
     <template is="dom-if" if="{{edit}}">
@@ -37,13 +41,7 @@
       this.set("survey.isComplete", true)
     },
     properties: {
-      survey: {notify:true},
-      q: {computed:'getQ(survey.question, edit, answer)'}
-    },
-    getQ: function(question, edit, answer) {
-      if (question && !edit && answer) {
-        return "Q: "+question+"<paper-button on-tap=\"alert(\'hi\')\">Yes</paper-button><paper-button on-tap=\"no\">No</paper-button>"
-      }
+      survey: {notify:true}
     }
   });
 </script>
