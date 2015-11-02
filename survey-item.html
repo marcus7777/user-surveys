@@ -41,7 +41,7 @@
       this.set("survey.isComplete", true)
     },
     properties: {
-      survey: {notify:true}
+      survey: {notify:true},
       showOnce:{computed:"getShowOnce(question, edit, answer)"}
     },
     getShowOnce(question, edit, answer) {
