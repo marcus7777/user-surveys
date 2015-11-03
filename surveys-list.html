@@ -8,11 +8,20 @@
     <template is="dom-if" if="{{!surveys.length}}">
       <p>No Surveys</p>
     </template>
-    <sortable-list>
-      <template is="dom-repeat" items="{{surveys}}" filter="{{filterSurvey(filterBy)}}">
-        <div><survey-item index="[[index]]" answer="[[answer]]" edit="[[edit]]" survey="{{item}}"></survey-item></div>
-      </template>
-    </sortable-list>
+    <template is="dom-if" if="{{edit}}">
+      <sortable-list>
+        <template is="dom-repeat" items="{{surveys}}">
+          <div><survey-item edit survey="{{item}}"></survey-item></div>
+        </template>
+      </sortable-list>
+    </template>
+    <template is="dom-if" if="{{answer}}">
+      <sortable-list>
+        <template is="dom-repeat" items="{{surveys}}" filter="{{filterSurvey(filterBy)}}">
+          <div><survey-item index="[[index]]" answer="[[answer]]" survey="{{item}}"></survey-item></div>
+        </template>
+      </sortable-list>
+    </template>
   </template>
 </dom-module>
 <script>
@@ -30,7 +39,6 @@
             return true
           }
         }
-        
         // Handle 'completed', or its inverse, 'active'
         var ifNotComplete = !(filterBy === 'completed');
         return function(item) {
