@@ -49,10 +49,10 @@
       No: {value: 'No'},
       Yes: {value: 'Yes'},
       survey: {notify: true},
-      showOnce: {computed: "getShowOnce(question, edit, answer)"}
+      showOnce: {computed: "getShowOnce(edit, answer)"}
     },
     getShowOnce(question, edit, answer) {
-      return (question && !edit && answer) 
+      return (!edit && answer) 
     }
   });
 </script>
