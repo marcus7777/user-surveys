@@ -5,9 +5,6 @@
 -->
 <dom-module id="surveys-list">
   <template>
-    <template is="dom-if" if="{{!surveys.length}}">
-      <p>No Surveys</p>
-    </template>
     <template is="dom-if" if="{{edit}}">
       <sortable-list>
         <template is="dom-repeat" items="{{surveys}}">
