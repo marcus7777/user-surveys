@@ -23,11 +23,13 @@
       </template>
     </template>
     <template is="dom-if" if="{{answer}}">
-      Q:[[survey.question]]
-      <span style="display: inline-block;text-align: right">
-        <paper-button on-tap="yes">{{Yes}}</paper-button>
-        <paper-button on-tap="no">{{No}}</paper-button>
-      </span>
+      <div>
+        Q: [[survey.question]]
+        <span style="display: inline-block;text-align: right">
+          <paper-button on-tap="yes">{{Yes}}</paper-button>
+          <paper-button on-tap="no">{{No}}</paper-button>
+        </span>
+      </div>
     </template>
   </template>
 </dom-module>
