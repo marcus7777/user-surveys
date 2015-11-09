@@ -1,7 +1,8 @@
-<link rel="import" href="../paper-button/paper-button.html">
-<link rel="import" href="../paper-input/paper-input.html">
-<link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../show-once/show-once.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-material/paper-material.html">
 <!--
 `<survey-item style="display:block" survey="{{item}}"></survey-item>`
 -->
@@ -23,13 +24,13 @@
       </template>
     </template>
     <template is="dom-if" if="{{answer}}">
-      <div>
+      <paper-material>
         Q: [[survey.question]]
         <span style="display: inline-block;text-align: right">
           <paper-button on-tap="yes">{{Yes}}</paper-button>
           <paper-button on-tap="no">{{No}}</paper-button>
         </span>
-      </div>
+      </paper-material>
     </template>
   </template>
 </dom-module>
