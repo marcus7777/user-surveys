@@ -23,8 +23,8 @@
       </template>
     </template>
     <template is="dom-if" if="{{answer}}">
-      Q:<b>{{survey.question}}</b>
-      <span style="float:right">
+      Q:[[survey.question]]
+      <span style="display: inline-block;text-align: right">
         <paper-button on-tap="yes">{{Yes}}</paper-button>
         <paper-button on-tap="no">{{No}}</paper-button>
       </span>
