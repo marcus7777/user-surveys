@@ -10,7 +10,7 @@
     <template is="dom-if" if="{{!index}}"><!-- if index === 0 --> 
       <template is="dom-if" if="{{showOnce}}">
         <show-once>
-          Q:<b>{{survey.question}}</b>
+          Q: {{survey.question}}
           <paper-button on-tap="yes">{{Yes}}</paper-button>
           <paper-button on-tap="no">{{No}}</paper-button>
         </show-once>
@@ -19,7 +19,7 @@
     <template is="dom-if" if="{{edit}}">
       <paper-input value="{{survey.question::change}}" label="Question"></paper-input>
       <template is="dom-if" if="{{survey.answer}}">    
-        answered: <a>{{survey.answer}}</a>
+        answered: {{survey.answer}}
       </template>
     </template>
     <template is="dom-if" if="{{answer}}">
