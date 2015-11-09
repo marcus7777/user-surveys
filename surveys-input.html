@@ -9,7 +9,10 @@
     <paper-button on-tap="add">Add</paper-button>
     <paper-dialog>
       <paper-input value="{{surveyQ::change}}" label="Question"></paper-input>
-      <div class="buttons"><paper-button dialog-confirm on-tap="_add">Add</paper-button></div>
+      <div class="buttons">
+        <paper-button dialog-confirm on-tap="_add">Add</paper-button>
+        <paper-button dialog-dismiss>Cancel</paper-button>
+      </div>
     </paper-dialog>
   </template>
 </dom-module>
