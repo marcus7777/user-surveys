@@ -5,24 +5,26 @@
 -->
 <dom-module id="surveys-list">
   <template>
+    <template is="dom-if" if="{{answered}}">
+      <template is="dom-repeat" items="{{surveys}}">
+        <paper-material style="background:#fff;padding:20px;margin:5px;width:250px">
+          <survey-item edit survey="{{item}}"></survey-item>
+        </paper-material>
+      </template>
+    </template>
     <template is="dom-if" if="{{edit}}">
-    
       <sortable-list style="display: inline-block">
         <template is="dom-repeat" items="{{surveys}}">
-        <paper-material style="background:#fff;padding:20px;margin:5px;width:250px">
-          <div><survey-item edit survey="{{item}}"></survey-item></div>
+          <paper-material style="background:#fff;padding:20px;margin:5px;width:250px">
+            <survey-item edit survey="{{item}}"></survey-item>
           </paper-material>
         </template>
       </sortable-list>
-
     </template>
     <template is="dom-if" if="{{answer}}">
-      <sortable-list style="display: inline-block">
-        <template is="dom-repeat" items="{{surveys}}" filter="{{filterSurvey(filterBy)}}">
-          <div><survey-item index="[[index]]" answer="[[answer]]" survey="{{item}}"></survey-item></div>
-        </template>
-      </sortable-list>
-
+      <template is="dom-repeat" items="{{surveys}}" filter="{{filterSurvey(filterBy)}}">
+        <div><survey-item index="[[index]]" answer="[[answer]]" survey="{{item}}"></survey-item></div>
+      </template>
     </template>
   </template>
 </dom-module>
