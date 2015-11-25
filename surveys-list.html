@@ -8,7 +8,7 @@
     <template is="dom-if" if="{{answered}}">
       <template is="dom-repeat" items="{{surveys}}">
         <paper-material style="background:#fff;padding:20px;margin:5px;width:250px">
-          <survey-item edit survey="{{item}}"></survey-item>
+          <survey-item answered survey="{{item}}"></survey-item>
         </paper-material>
       </template>
     </template>
