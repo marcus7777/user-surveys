@@ -18,19 +18,21 @@
       </template>
     </template>
     <template is="dom-if" if="{{edit}}">
-      <paper-input value="{{survey.question::change}}" label="Question"></paper-input>
-      <template is="dom-if" if="{{survey.answer}}">    
+      <div id="surveyq">
+        <paper-input value="{{survey.question::change}}" label="Question"></paper-input>
+      </div>
+<!--       <div id="surveya" >
+        <template is="dom-if" if="{{survey.answer}}">    
         answered: {{survey.answer}}
       </template>
+      </div> -->
     </template>
     <template is="dom-if" if="{{answer}}">
-      <paper-material style="background:#fff;padding:20px;margin: 5px;width: 250px">
         Q: [[survey.question]]
         <span style="float:right">
           <paper-button on-tap="yes">{{Yes}}</paper-button>
           <paper-button on-tap="no">{{No}}</paper-button>
         </span>
-      </paper-material>
     </template>
   </template>
 </dom-module>
