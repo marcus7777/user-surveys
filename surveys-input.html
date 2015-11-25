@@ -6,11 +6,11 @@
 -->
 <dom-module id="survey-input">
   <template>
-    <paper-button on-tap="add">Add</paper-button>
+    <paper-button on-tap="add" style="background: #FF5722;color: #FFF;">Add</paper-button>
     <paper-dialog>
       <paper-input value="{{surveyQ::change}}" label="Question"></paper-input>
       <div class="buttons">
-        <paper-button dialog-confirm on-tap="_add">Add</paper-button>
+        <paper-button dialog-confirm on-tap="_add" style="background: #FF5722;color: #FFF;" raised on-tap="toggleView">Add</paper-button>
         <paper-button dialog-dismiss>Cancel</paper-button>
       </div>
     </paper-dialog>
