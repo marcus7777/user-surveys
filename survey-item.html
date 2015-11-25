@@ -9,6 +9,7 @@
 <dom-module id="survey-item">
   <template>
     <template is="dom-if" if="{{!index}}"><!-- if index === 0 --> 
+     <paper-material style="background:#fff;padding:20px;margin:5px;width:250px">
       <template is="dom-if" if="{{showOnce}}">
         <show-once>
           Q: {{survey.question}}
@@ -22,9 +23,10 @@
       <template is="dom-if" if="{{survey.answer}}">    
         answered: {{survey.answer}}
       </template>
+      </paper-material>
     </template>
     <template is="dom-if" if="{{answer}}">
-      <paper-material style="background:#fff;padding:20px;margin: 5px;max-width: 200px">
+      <paper-material style="background:#fff;padding:20px;margin: 5px;width: 250px">
         Q: [[survey.question]]
         <span style="float:right">
           <paper-button on-tap="yes">{{Yes}}</paper-button>
