@@ -21,11 +21,12 @@
       <div id="surveyq">
         <paper-input value="{{survey.question::change}}" label="Question"></paper-input>
       </div>
-<!--       <div id="surveya" >
-        <template is="dom-if" if="{{survey.answer}}">    
+    </template>
+    <template is="dom-if" if="{{answered}}">
+      {{survey.question}}
+      <template is="dom-if" if="{{survey.answer}}">    
         answered: {{survey.answer}}
       </template>
-      </div> -->
     </template>
     <template is="dom-if" if="{{answer}}">
         Q: [[survey.question]]
@@ -53,6 +54,7 @@
     properties: {
       edit: Boolean,
       answer: Boolean,
+      answered: Boolean,
       No: {value: 'No'},
       Yes: {value: 'Yes'},
       survey: {notify: true},
