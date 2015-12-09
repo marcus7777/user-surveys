@@ -8,14 +8,12 @@
 -->
 <dom-module id="survey-item">
   <template>
-    <template is="dom-if" if="{{!index}}"><!-- if index === 0 --> 
-      <template is="dom-if" if="{{showOnce}}">
-        <show-once>
-          Q: {{survey.question}}
-          <paper-button on-tap="yes">{{Yes}}</paper-button>
-          <paper-button on-tap="no">{{No}}</paper-button>
-        </show-once>
-      </template>
+    <template is="dom-if" if="{{showOnce}}">
+      <show-once>
+        Q: {{survey.question}}
+        <paper-button on-tap="yes">{{Yes}}</paper-button>
+        <paper-button on-tap="no">{{No}}</paper-button>
+      </show-once>
     </template>
     <template is="dom-if" if="{{edit}}">
       <div id="surveyq">
@@ -40,6 +38,7 @@
   </template>
 </dom-module>
 <script>
+  var shown
   Polymer({
     is: 'survey-item',
     _onDelete: function() {
@@ -60,10 +59,16 @@
       No: {value: 'No'},
       Yes: {value: 'Yes'},
       survey: {notify: true},
-      showOnce: {computed: "getShowOnce(edit, answer)"}
+      showOnce: {computed: "getShowOnce(edit, answer, index)"}
     },
-    getShowOnce: function(edit, answer) {
-      return (!edit && answer) 
+    getShowOnce: function(edit, answer, index) {
+      if (!shown && index === 0) {
+        shown = true
+        return (!edit && answer) 
+      } else {
+        return false
+      }
+      
     }
   });
 </script>
