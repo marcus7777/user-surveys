@@ -60,7 +60,7 @@
       survey: {notify: true},
       showOnce: {computed: "getShowOnce(edit, answer)"}
     },
-    getShowOnce: function(question, edit, answer) {
+    getShowOnce: function(edit, answer) {
       return (!edit && answer) 
     }
   });
