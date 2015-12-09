@@ -1,6 +1,5 @@
 <link rel="import" href="../show-once/show-once.html">
 <link rel="import" href="../paper-input/paper-input.html">
-<link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-material/paper-material.html">
 <!--
@@ -8,7 +7,7 @@
 -->
 <dom-module id="survey-item">
   <template>
-    <template is="dom-if" if="{{!index}}"><!-- if index === 0 --> 
+    <template is="dom-if" if="{{!index}}"><!-- if index === 0 -->
       <template is="dom-if" if="{{showOnce}}">
         <show-once>
           Q: {{survey.question}}
@@ -19,12 +18,12 @@
     </template>
     <template is="dom-if" if="{{edit}}">
       <div id="surveyq">
-        <paper-input value="{{survey.question::change}}" label="Question"></paper-input>
+        <paper-input char-counter maxlength="30" value="{{survey.question::change}}" disabled label="Question"></paper-input>
       </div>
     </template>
     <template is="dom-if" if="{{answered}}">
       {{survey.question}}<br />
-      <template is="dom-if" if="{{survey.answer}}">    
+      <template is="dom-if" if="{{survey.answer}}">
         answered: {{survey.answer}}
       </template>
     </template>
@@ -61,7 +60,7 @@
       showOnce: {computed: "getShowOnce(edit, answer)"}
     },
     getShowOnce(question, edit, answer) {
-      return (!edit && answer) 
+      return (!edit && answer)
     }
   });
 </script>
