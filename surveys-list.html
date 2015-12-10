@@ -7,7 +7,7 @@
   <template>
     <template is="dom-if" if="{{answered}}">
       <template is="dom-repeat" items="{{surveys}}">
-        <paper-material style="background:#fff;padding:20px;margin:5px;width:250px">
+        <paper-material style="background:#fff;padding:20px;margin:5px;width:300px">
           <survey-item answered survey="{{item}}"></survey-item>
         </paper-material>
       </template>
@@ -15,8 +15,8 @@
     <template is="dom-if" if="{{edit}}">
       <sortable-list style="display: inline-block">
         <template is="dom-repeat" items="{{surveys}}">
-          <paper-material style="background:#fff;padding:20px;margin:5px;width:250px">
-            <survey-item edit survey="{{item}}"></survey-item>
+          <paper-material style="background:#fff;padding:20px;margin:5px;width:300px">
+              <survey-item edit survey="{{item}}"></survey-item>
           </paper-material>
         </template>
       </sortable-list>

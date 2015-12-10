@@ -2,9 +2,11 @@
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-material/paper-material.html">
+<link rel="import" href="../paper-textarea/paper-textarea.html">
 <!--
 `<survey-item style="display:block" survey="{{item}}"></survey-item>`
 -->
+
 <dom-module id="survey-item">
   <template>
     <template is="dom-if" if="{{!index}}"><!-- if index === 0 -->
@@ -17,9 +19,7 @@
       </template>
     </template>
     <template is="dom-if" if="{{edit}}">
-      <div id="surveyq">
-        <paper-input char-counter maxlength="30" value="{{survey.question::change}}" disabled label="Question"></paper-input>
-      </div>
+        <paper-textarea char-counter maxlength="25" value="{{survey.question::change}}" disabled label="Question"></paper-textarea>
     </template>
     <template is="dom-if" if="{{answered}}">
       {{survey.question}}<br />
