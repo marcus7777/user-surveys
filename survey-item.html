@@ -28,10 +28,12 @@
       </template>
     </template>
     <template is="dom-if" if="{{answer}}">
-        Q: [[survey.question]]
+    <div id="ques" style="margin-bottom: 30px;">
+      Q: [[survey.question]]
+    </div>
         <span>
-          <paper-button on-tap="yes">{{Yes}}</paper-button>
-          <paper-button on-tap="no">{{No}}</paper-button>
+          <paper-button raised="1" on-tap="yes">{{Yes}}</paper-button>
+          <paper-button raised="1" on-tap="no">{{No}}</paper-button>
         </span>
     </template>
   </template>
