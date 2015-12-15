@@ -24,10 +24,10 @@
     properties: {
       folder: String,
       defaultFolder: {type:String, value:"default"},
-      edit: Boolean,
-      answer: Boolean,
-      answered: Boolean,
-      editDefault: Boolean,
+      edit: {type: Boolean, value: false},
+      answer: {type: Boolean, value: false},
+      answered: {type: Boolean, value: false},
+      editDefault: {type: Boolean, value: false},
       surveysFolder: {computed:"getSurveysFolder(folder)"},
       surveysDefaultFolder: {computed:"getSurveysDefaultFolder(defaultFolder)"}
     },
