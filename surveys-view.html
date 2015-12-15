@@ -20,8 +20,9 @@
     is: "surveys-view",
     properties: {
       surveys: Array,
-      edit: Boolean,
-      answer: Boolean,
+      edit: {type: Boolean, value: false},
+      answer: {type: Boolean, value: false},
+      answered: {type: Boolean, value: false},
       editDefault: Boolean
     },
     addSurveyQuestion: function(e) {
