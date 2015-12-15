@@ -13,8 +13,8 @@
       <template is="dom-if" if="{{showOnce}}">
         <show-once>
           Q: {{survey.question}}
-          <paper-button on-tap="yes">{{Yes}}</paper-button>
-          <paper-button on-tap="no">{{No}}</paper-button>
+          <paper-button raised="1" on-tap="yes">{{Yes}}</paper-button>
+          <paper-button raised="1" on-tap="no">{{No}}</paper-button>
         </show-once>
       </template>
     </template>
@@ -29,7 +29,7 @@
     </template>
     <template is="dom-if" if="{{answer}}">
         Q: [[survey.question]]
-        <span style="float:right">
+        <span>
           <paper-button on-tap="yes">{{Yes}}</paper-button>
           <paper-button on-tap="no">{{No}}</paper-button>
         </span>

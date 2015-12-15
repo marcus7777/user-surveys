@@ -21,9 +21,12 @@
         </template>
       </sortable-list>
     </template>
+    <!-- Survey Questions in the Account -->
     <template is="dom-if" if="{{answer}}">
-      <template is="dom-repeat" items="{{surveys}}" filter="{{filterSurvey(filterBy)}}">
-        <div><survey-item index="[[index]]" answer="[[answer]]" survey="{{item}}"></survey-item></div>
+          <template is="dom-repeat" items="{{surveys}}" filter="{{filterSurvey(filterBy)}}">
+          <paper-material elevation="1" style="padding: 20px; float: right;">
+            <div ><survey-item index="[[index]]" answer="[[answer]]" survey="{{item}}"></survey-item></div>
+          </paper-material>
       </template>
     </template>
   </template>
