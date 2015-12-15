@@ -16,7 +16,7 @@
       <sortable-list style="display: inline-block">
         <template is="dom-repeat" items="{{surveys}}">
           <paper-material style="background:#fff;padding:20px;margin:5px;width:250px">
-            <survey-item edit survey="{{item}}"></survey-item>
+            <survey-item edit survey="{{item}}" on-delete-survey="deleteSurvey"></survey-item>
           </paper-material>
         </template>
       </sortable-list>
@@ -32,8 +32,11 @@
   Polymer({
     is: 'surveys-list',
     properties: {
-      surveys:{notify:true},
-      filterBy:{type:String,value:"not"}
+      surveys: {notify:true},
+      filterBy: {type:String,value:"not"}
+    },
+    deleteSurveys: function(e) {
+      this.arrayDelete('surveys', e.detail.badge);
     },
     filterSurvey: function(filterBy) {
       if (filterBy) {
