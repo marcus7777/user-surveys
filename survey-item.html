@@ -3,6 +3,7 @@
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-material/paper-material.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <!--
 `<survey-item style="display:block" survey="{{item}}"></survey-item>`
 -->
@@ -18,6 +19,8 @@
     <template is="dom-if" if="{{edit}}">
       <div id="surveyq">
         <paper-input value="{{survey.question::change}}" label="Question"></paper-input>
+        <paper-icon-button style="color:gray; float:right;" icon="delete" aria-label="Delete Badge" tabindex="0" 
+      on-tap="_onDelete"></paper-icon-button>
       </div>
     </template>
     <template is="dom-if" if="{{answered}}">
