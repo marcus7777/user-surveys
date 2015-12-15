@@ -71,7 +71,9 @@
       } else {
         return false
       }
-      
+    },
+    _onDelete: function() {
+      this.fire('delete-survey', {survey: this.survey});
     }
   });
 </script>
