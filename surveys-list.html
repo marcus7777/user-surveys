@@ -33,6 +33,9 @@
     is: 'surveys-list',
     properties: {
       surveys: {notify:true},
+      edit: {type: Boolean, value: false},
+      answer: {type: Boolean, value: false},
+      answered: {type: Boolean, value: false},
       filterBy: {type:String,value:"not"}
     },
     deleteSurvey: function(e) {
