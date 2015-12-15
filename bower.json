@@ -9,6 +9,7 @@
   "dependencies": {
     "polymer": "*",
     "show-once":"marcus7777/show-once",
-    "paper-material":"PolymerElements/paper-material"
+    "paper-material":"PolymerElements/paper-material",
+    "paper-icon-button":"PolymerElements/paper-icon-button"
   }
 }
