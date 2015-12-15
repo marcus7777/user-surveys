@@ -23,7 +23,7 @@
     </template>
     <template is="dom-if" if="{{answer}}">
       <template is="dom-repeat" items="{{surveys}}" filter="{{filterSurvey(filterBy)}}">
-        <div><survey-item index="[[index]]" answer="[[answer]]" survey="{{item}}"></survey-item></div>
+        <div><survey-item index="[[index]]" answer="[[answer]]" answered="[[answered]]" survey="{{item}}"></survey-item></div>
       </template>
     </template>
   </template>
