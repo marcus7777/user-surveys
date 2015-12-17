@@ -3,23 +3,26 @@
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-material/paper-material.html">
 <link rel="import" href="../paper-textarea/paper-textarea.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <!--
 `<survey-item style="display:block" survey="{{item}}"></survey-item>`
 -->
 
 <dom-module id="survey-item">
   <template>
-    <template is="dom-if" if="{{!index}}"><!-- if index === 0 -->
-      <template is="dom-if" if="{{showOnce}}">
-        <show-once>
-          Q: {{survey.question}}
-          <paper-button raised="1" on-tap="yes">{{Yes}}</paper-button>
-          <paper-button raised="1" on-tap="no">{{No}}</paper-button>
-        </show-once>
-      </template>
+    <template is="dom-if" if="{{showOnce}}">
+      <show-once>
+        Q: {{survey.question}}
+       <paper-button raised="1" on-tap="yes">{{Yes}}</paper-button>
+       <paper-button raised="1" on-tap="no">{{No}}</paper-button>
+      </show-once>
     </template>
     <template is="dom-if" if="{{edit}}">
-        <paper-textarea char-counter maxlength="25" value="{{survey.question::change}}" disabled label="Question"></paper-textarea>
+      <paper-textarea char-counter maxlength="25" value="{{survey.question::change}}" disabled label="Question"></paper-textarea>
+      <div id="surveyq">
+        <paper-icon-button style="color:gray; float:right;" icon="delete" aria-label="Delete Survey" tabindex="0" 
+      on-tap="_onDelete"></paper-icon-button>
+      </div>
     </template>
     <template is="dom-if" if="{{answered}}">
       {{survey.question}}<br />
@@ -28,17 +31,18 @@
       </template>
     </template>
     <template is="dom-if" if="{{answer}}">
-    <div id="ques" style="margin-bottom: 30px;">
-      Q: [[survey.question]]
-    </div>
-        <span>
-          <paper-button raised="1" on-tap="yes">{{Yes}}</paper-button>
-          <paper-button raised="1" on-tap="no">{{No}}</paper-button>
-        </span>
+      <div id="ques" style="margin-bottom: 30px;">
+        Q: [[survey.question]]
+      </div>
+      <span>
+         <paper-button raised="1" on-tap="yes">{{Yes}}</paper-button>
+         <paper-button raised="1" on-tap="no">{{No}}</paper-button>
+      </span>
     </template>
   </template>
 </dom-module>
 <script>
+  var shown
   Polymer({
     is: 'survey-item',
     _onDelete: function() {
@@ -53,16 +57,27 @@
       this.set("survey.isComplete", true)
     },
     properties: {
-      edit: Boolean,
-      answer: Boolean,
-      answered: Boolean,
+      edit: {type: Boolean, value: false},
+      answer: {type: Boolean, value: false},
+      answered: {type: Boolean, value: false},
       No: {value: 'No'},
       Yes: {value: 'Yes'},
       survey: {notify: true},
-      showOnce: {computed: "getShowOnce(edit, answer)"}
+      showOnce: {computed: "getShowOnce(edit, answer, index)"}
+    },
+    getShowOnce: function(edit, answer, index) {
+      if (!shown && index === 0) {
+        shown = true
+        return (!edit && answer) 
+      } else {
+        return false
+      }
     },
     getShowOnce(question, edit, answer) {
       return (!edit && answer)
+    },
+    _onDelete: function() {
+      this.fire('delete-survey', {survey: this.survey});
     }
   });
 </script>

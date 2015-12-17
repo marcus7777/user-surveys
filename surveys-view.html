@@ -8,7 +8,7 @@
 
 <dom-module id="surveys-view">
   <template>
-    <mediator-data id="s" as-array="{{surveys}}" location="{{location}}" folder="[[folder]]" default-folder="{{defaultFolder}}"></mediator-data>
+    <mediator-data id="s" sync='["question"]' as-array="{{surveys}}" location="{{location}}" folder="[[folder]]" default-folder="{{defaultFolder}}"></mediator-data>
     <surveys-list edit="[[edit]]" answer="[[answer]]" answered="[[answered]]" edit-default="[[editDefault]]" surveys="{{surveys}}" on-delete-survey="deleteSurveyQuestion"></surveys-list>
     <template is="dom-if" if="{{edit}}">
       <survey-input on-add-survey="addSurveyQuestion"></survey-input>
@@ -20,17 +20,15 @@
     is: "surveys-view",
     properties: {
       surveys: Array,
-      edit: Boolean,
-      answer: Boolean,
+      edit: {type: Boolean, value: false},
+      answer: {type: Boolean, value: false},
+      answered: {type: Boolean, value: false},
       editDefault: Boolean
     },
     addSurveyQuestion: function(e) {
       this.$.s.push({
         question: e.detail.Q
       });
-    },
-    deleteSurveyQuestion: function(e) {
-      this.arrayDelete('surveys', e.detail.surveyQuestion); //TODO e.detail.??
     },
     toggleView: function() {
       if (this.edit) this.admin = !this.admin;

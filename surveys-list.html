@@ -16,17 +16,17 @@
       <sortable-list style="display: inline-block">
         <template is="dom-repeat" items="{{surveys}}">
           <paper-material style="background:#fff;padding:20px;margin:5px;width:300px">
-              <survey-item edit survey="{{item}}"></survey-item>
+            <survey-item edit survey="{{item}}" on-delete-survey="deleteSurvey"></survey-item>
           </paper-material>
         </template>
       </sortable-list>
     </template>
     <!-- Survey Questions in the Account -->
     <template is="dom-if" if="{{answer}}">
-          <template is="dom-repeat" items="{{surveys}}" filter="{{filterSurvey(filterBy)}}">
-          <paper-material elevation="1" style="padding: 20px; float: right;">
-            <div ><survey-item index="[[index]]" answer="[[answer]]" survey="{{item}}"></survey-item></div>
-          </paper-material>
+      <template is="dom-repeat" items="{{surveys}}" filter="{{filterSurvey(filterBy)}}">
+        <paper-material elevation="1" style="padding: 20px; float: right;">
+          <div><survey-item index="[[index]]" answer="[[answer]]" answered="[[answered]]" survey="{{item}}"></survey-item></div>
+        </paper-material>
       </template>
     </template>
   </template>
@@ -35,8 +35,14 @@
   Polymer({
     is: 'surveys-list',
     properties: {
-      surveys:{notify:true},
-      filterBy:{type:String,value:"not"}
+      surveys: {notify:true},
+      edit: {type: Boolean, value: false},
+      answer: {type: Boolean, value: false},
+      answered: {type: Boolean, value: false},
+      filterBy: {type:String,value:"not"}
+    },
+    deleteSurvey: function(e) {
+      this.arrayDelete('surveys', e.detail.survey);
     },
     filterSurvey: function(filterBy) {
       if (filterBy) {
