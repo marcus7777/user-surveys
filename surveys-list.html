@@ -23,6 +23,9 @@
     </template>
     <!-- Survey Questions in the Account -->
     <template is="dom-if" if="{{answer}}">
+      <template is="dom-if" if="{{!surveys.length}}">
+        <h4>Thank you for you time. All Questions Answered.</h4>
+      </template>
       <template is="dom-repeat" items="{{surveys}}" filter="{{filterSurvey(filterBy)}}">
         <paper-material elevation="1" style="padding: 20px; float: right;">
           <div><survey-item index="[[index]]" answer="[[answer]]" answered="[[answered]]" survey="{{item}}"></survey-item></div>
