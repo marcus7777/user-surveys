@@ -20,7 +20,7 @@
     <template is="dom-if" if="{{edit}}">
       <paper-textarea char-counter maxlength="25" value="{{survey.question::change}}" disabled label="Question"></paper-textarea>
       <div id="surveyq">
-        <paper-icon-button style="color:gray; float:right;" icon="delete" aria-label="Delete Survey" tabindex="0" 
+        <paper-icon-button style="color:gray; float:right; right: -50px; top: 15px;" icon="delete" aria-label="Delete Survey" tabindex="0"
       on-tap="_onDelete"></paper-icon-button>
       </div>
     </template>
