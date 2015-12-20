@@ -3,42 +3,64 @@
 `<user-surveys answer edit edit-default folder="marcus7777"></user-surveys>` Surveys for users 
 @demo demo.html
 -->
-
 <dom-module id="user-surveys">
   <template>
     <style>
-      paper-dialog  > * {
-        padding: 0 2px;
-      }
+    paper-dialog > * {
+      padding: 0 2px;
+    }
     </style>
     <surveys-view answer="[[answer]]" answered="[[answered]]" location="[[location]]" edit="{{edit}}" folder="[[surveysFolder]]" default-folder="{{surveysDefaultFolder}}" edit-default="{{editDefault}}"></surveys-view>
     <template is="dom-if" if="{{editDefault}}">
+      <div id="tithere" style="padding-bottom: 50px;">
+        <h2 style="float: left; width:200px; padding:0;">Surveys</h2>
+        <paper-button raised="1" style="float:right; text-decoration: none; margin: 10px;"><a href="https://hi9.uk/#!/admin" style="text-decoration: none;">BACK</a></paper-button>
+      </div>
       <h3>Create, Edit or Delete Surveys</h3>
-        <p>Everytime you create a new question it is added to all your User's Accounts. They are then notified each day by a popup on their window or a survey question that needs to be answered.</p>
-        <p>They can also goto their Account and see the Survey questions laid out. Everytime they answer one it dissapears from their list</p>
-        <p>Lastly, they are emailed each day with a reminder to answer their list of questions if they have done so already</p>
+      <p>Everytime you create a new question it is added to all your User's Accounts. They are then notified each day by a popup on their window or a survey question that needs to be answered.</p>
+      <p>They can also goto their Account and see the Survey questions laid out. Everytime they answer one it dissapears from their list</p>
+      <p>Lastly, they are emailed each day with a reminder to answer their list of questions if they have done so already</p>
       <user-surveys edit location="[[location]]" filter-by="all" folder="[[defaultFolder]]"></user-surveys>
     </template>
   </template>
 </dom-module>
 <script>
-  Polymer({
-    is: "user-surveys",
-    properties: {
-      folder: String,
-      defaultFolder: {type:String, value:"default"},
-      edit: {type: Boolean, value: false},
-      answer: {type: Boolean, value: false},
-      answered: {type: Boolean, value: false},
-      editDefault: {type: Boolean, value: false},
-      surveysFolder: {computed:"getSurveysFolder(folder)"},
-      surveysDefaultFolder: {computed:"getSurveysDefaultFolder(defaultFolder)"}
+Polymer({
+  is: "user-surveys",
+  properties: {
+    folder: String,
+    defaultFolder: {
+      type: String,
+      value: "default"
     },
-    getSurveysFolder: function(folder) {
-      return folder+"/surveys"
+    edit: {
+      type: Boolean,
+      value: false
     },
-    getSurveysDefaultFolder: function(defaultFolder) {
-      return defaultFolder+"/surveys"
+    answer: {
+      type: Boolean,
+      value: false
+    },
+    answered: {
+      type: Boolean,
+      value: false
+    },
+    editDefault: {
+      type: Boolean,
+      value: false
+    },
+    surveysFolder: {
+      computed: "getSurveysFolder(folder)"
+    },
+    surveysDefaultFolder: {
+      computed: "getSurveysDefaultFolder(defaultFolder)"
     }
-  });
+  },
+  getSurveysFolder: function(folder) {
+    return folder + "/surveys"
+  },
+  getSurveysDefaultFolder: function(defaultFolder) {
+    return defaultFolder + "/surveys"
+  }
+});
 </script>
