@@ -21,11 +21,19 @@
       <div id="surveyq">
         <paper-icon-button style="color:gray; float:right; right: -50px; top: 15px;" icon="delete" aria-label="Delete Survey" tabindex="0" on-tap="_onDelete"></paper-icon-button>
       </div>
+      <template is="dom-repeat" items="{{showData}}">
+        {{item.title}}
+        {{item.num}}
+      </template>
     </template>
     <template is="dom-if" if="{{answered}}">
       <div id="survques" style="margin:5px; font-size: 16px; font-weight: 200;">
         {{survey.question}}
         <br />
+        <template is="dom-repeat" items="{{showData}}">
+          {{item.title}}
+          {{item.num}}
+        </template>
       </div>
       <template is="dom-if" if="{{survey.answer}}">
         <div id="survanswer" style="margin:5px;">
@@ -74,18 +82,11 @@ Polymer({
       type: Boolean,
       value: false
     },
-    No: {
-      value: 'No'
-    },
-    Yes: {
-      value: 'Yes'
-    },
-    survey: {
-      notify: true
-    },
-    showOnce: {
-      computed: "getShowOnce(edit, answer, index)"
-    }
+    No: { value: 'No' },
+    Yes: { value: 'Yes' },
+    survey: { notify: true },
+    showOnce: { computed: "getShowOnce(edit, answer, index)" },
+    showData: { computed: "getShowData(survey, data, Yes, No)" }
   },
   getShowOnce: function(edit, answer, index) {
     if (!shown && index === 0) {
@@ -95,13 +96,33 @@ Polymer({
       return false
     }
   },
-  getShowOnce(question, edit, answer) {
-    return (!edit && answer)
+  getShowData: function(survey, data, Yes, No) {
+    var ansYes = 0
+    var ansNo = 0
+    var unans = 0
+
+    for (peops in data) {
+      for (key in data[peops].surveys) {
+        if (data[peops].surveys[key].question === survey.question) {
+          if (data[peops].surveys[key].isComplete ) {
+            if (data[peops].surveys[key].answer === Yes ) {
+              ansYes = ansYes + 1
+            } else {
+              ansNo = ansNo + 1
+            }
+          } else {
+            unans = unans + 1
+          }
+          console.log(data[peops].surveys[key])
+        }
+      }
+    } 
+    return [{title: Yes, num: ansYes},{title: No, num: ansNo},{title: "Unanswered", num: unans}]
   },
   _onDelete: function() {
     this.fire('delete-survey', {
       survey: this.survey
-    });
+    })
   }
 });
 </script>
