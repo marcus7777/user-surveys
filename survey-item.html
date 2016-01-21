@@ -99,7 +99,7 @@ Polymer({
   getShowData: function(survey, data, Yes, No) {
     var ansYes = 0
     var ansNo = 0
-    var unans = 0
+    var unans = -1 //DOTO do not count default
 
     for (peops in data) {
       for (key in data[peops].surveys) {
