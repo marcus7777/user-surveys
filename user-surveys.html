@@ -1,6 +1,6 @@
 <link rel="import" href="surveys-view.html">
 <!--
-`<user-surveys answer edit edit-default folder="marcus7777"></user-surveys>` Surveys for users 
+`<user-surveys answer edit edit-default folder="marcus7777"></user-surveys>` Surveys for users
 @demo demo.html
 -->
 <dom-module id="user-surveys">
@@ -9,11 +9,19 @@
     paper-dialog > * {
       padding: 0 2px;
     }
+    iron-icon {
+      color: #FFF;
+      height: 40px;
+      width: 40px;
+      float: right;
+      margin: 15px 20px 0px 0px;
+    }
     </style>
     <surveys-view answer="[[answer]]" answered="[[answered]]" location="[[location]]" edit="{{edit}}" folder="[[surveysFolder]]" default-folder="{{surveysDefaultFolder}}" edit-default="{{editDefault}}"></surveys-view>
     <template is="dom-if" if="{{editDefault}}">
-      <div id="tithere" style="padding-bottom: 50px;">
-        <h2 style="float: left; width:200px; padding:0;">Surveys</h2>
+      <div id="listofUserHeading" style="height: 50px; width: 100%; background-color: blue; padding: 2px 0 20px 20px;">
+        <h2 style="color: #FFF; float:left;">Surveys</h2>
+        <iron-icon icon="account-circle"></iron-icon>
       </div>
       <h3>Create or Delete Surveys</h3>
       <user-surveys edit location="[[location]]" filter-by="all" folder="[[defaultFolder]]"></user-surveys>
