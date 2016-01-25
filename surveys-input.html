@@ -2,12 +2,13 @@
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../paper-input/paper-textarea.html">
-<!-- 
+<link rel="import" href="../paper-fab/paper-fab.html">
+<!--
 `<survey-input on-add-badge="addSurvey"></survey-input>`
 -->
 <dom-module id="survey-input">
   <template>
-    <paper-button on-tap="add" style="background: #FF5722;color: #FFF;margin: 20px;">Add</paper-button>
+    <paper-fab on-tap="add" icon="add" elevation="4" style="background: red;color: #FFF; position: fixed; right: 30px; bottom: 30px;">Add</paper-fab>
     <paper-dialog modal style="width:350px; height: 200px;">
         <paper-textarea value="{{surveyQ::change}}" label="Question" char-counter maxlength="25"></paper-textarea>
         <div class="buttons">
