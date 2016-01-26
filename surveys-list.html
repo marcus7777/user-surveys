@@ -42,24 +42,28 @@
       edit: {type: Boolean, value: false},
       answer: {type: Boolean, value: false},
       answered: {type: Boolean, value: false},
-      filterBy: {type:String,value:"not"}
+      filterBy: {type:String,value:"default"}
     },
     deleteSurvey: function(e) {
       this.arrayDelete('surveys', e.detail.survey);
     },
     filterSurvey: function(filterBy) {
-      var ifNotComplete = !(filterBy === 'completed')
-      var ifArchive = (filterBy === 'archive')
-        
+      var _filterBy = filterBy 
       return function(item) {
-        if (item.isComplete !== ifNotComplete) {
-          if (item.archive === ifArchive) {
-            return true
-          } else {
-            return false
-          }
+        var include = false
+        if (_filterBy === 'all') {
+          include = true
         }
-        return false
+        if (item.isComplete === false && _filterBy === 'default' && !item.archive){
+          include = true
+        }
+        if (item.isComplete && _filterBy === 'completed' && !item.archive) {
+          include = true
+        }
+        if (item.archive && _filterBy === 'archive') {
+          include = true
+        }
+        return include
       }
     }
   });
