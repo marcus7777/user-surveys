@@ -6,7 +6,7 @@
 <dom-module id="surveys-list">
   <template>
     <template is="dom-if" if="{{answered}}">
-      <template is="dom-repeat" items="{{surveys}}">
+      <template is="dom-repeat" items="{{surveys}}" filter="{{filterSurvey(filterBy)}}">
         <paper-material style="background:#fff;padding:20px;margin:5px;width:250px;float:left">
           <survey-item data="{{data}}" answered survey="{{item}}"></survey-item>
         </paper-material>
