@@ -13,7 +13,7 @@
       </template>
     </template>
     <template is="dom-if" if="{{edit}}">
-      Show Archive <paper-toggle-button change="updateList" checked="{{ShowArchive}}"></paper-toggle-button>
+      Show Archive <paper-toggle-button checked="{{showArchive}}"></paper-toggle-button>
       <sortable-list style="display:inline-block;margin-left: 50px">
         <template id="edit" is="dom-repeat" items="{{surveys}}" filter="filterSurvey" sort="sortItems">
           <paper-material style="background:#fff;padding:20px;margin:5px;width:250px;float:left">
@@ -43,7 +43,8 @@
       edit: {type: Boolean, value: false},
       answer: {type: Boolean, value: false},
       answered: {type: Boolean, value: false},
-      filterBy: {type:String,value:"default"}
+      filterBy: {type:String,value:"default"},
+      showArchive: {observer:"updateList"}
     },
     deleteSurvey: function(e) {
       this.arrayDelete('surveys', e.detail.survey);
