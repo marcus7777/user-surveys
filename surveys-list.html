@@ -6,16 +6,16 @@
 <dom-module id="surveys-list">
   <template>
     <template is="dom-if" if="{{answered}}">
-      <template is="dom-repeat" items="{{surveys}}">
-        <paper-material style="background:#fff;padding:20px;margin:5px;width:250px; float:left;">
+      <template is="dom-repeat" items="{{surveys}}" filter="filterSurvey" sort="sortItems">
+        <paper-material style="background:#fff;padding:20px;margin:5px;width:250px;float:left">
           <survey-item data="{{data}}" answered survey="{{item}}"></survey-item>
         </paper-material>
       </template>
     </template>
     <template is="dom-if" if="{{edit}}">
       <sortable-list style="display: inline-block; margin-left: 50px;">
-        <template is="dom-repeat" items="{{surveys}}">
-          <paper-material style="background:#fff;padding:20px;margin:5px;width:250px; float:left;">
+        <template is="dom-repeat" items="{{surveys}}" filter="filterSurvey" sort="sortItems">
+          <paper-material style="background:#fff;padding:20px;margin:5px;width:250px;float:left">
             <survey-item data="{{data}}" edit survey="{{item}}" on-delete-survey="deleteSurvey"></survey-item>
           </paper-material>
         </template>
@@ -26,7 +26,7 @@
       <template is="dom-if" if="{{!surveys.length}}">
         <h4>Thank you for you time. All Questions Answered.</h4>
       </template>
-      <template is="dom-repeat" items="{{surveys}}" filter="{{filterSurvey(filterBy)}}">
+      <template is="dom-repeat" items="{{surveys}}" filter="filterSurvey" sort="sortItems">
         <paper-material elevation="1" style="padding: 20px; float: left;margin: 10px;">
           <div><survey-item index="[[index]]" answer="[[answer]]" answered="[[answered]]" survey="{{item}}"></survey-item></div>
         </paper-material>
@@ -42,25 +42,54 @@
       edit: {type: Boolean, value: false},
       answer: {type: Boolean, value: false},
       answered: {type: Boolean, value: false},
-      filterBy: {type:String,value:"not"}
+      filterBy: {type:String,value:"default"}
     },
     deleteSurvey: function(e) {
       this.arrayDelete('surveys', e.detail.survey);
     },
-    filterSurvey: function(filterBy) {
-      if (filterBy) {
-        // If filterBy is 'all', return a filter
-        if (filterBy === 'all') {
-          return function() {
-            return true
+    filterSurvey: function(item) {
+      var include = false
+      if (this.filterBy === 'all' && !item.archive) {
+        include = true
+      }
+      if (item.isComplete === false && this.filterBy === 'default' && !item.archive){
+        include = true
+      }
+      if (item.isComplete && this.filterBy === 'completed' && !item.archive) {
+        include = true
+      }
+      if (item.archive && this.filterBy === 'archive') {
+        include = true
+      }
+      return include
+    },
+    sortItems: function(a, b){
+      if (a.order && b.order) {
+        return naturalSorter (a.order, b.order)
+      } else if (a.title && b.title) {
+        return naturalSorter (a.title, b.title)
+      } else if (a.value && b.value) {
+        return naturalSorter (a.value, b.value)
+      }
+      function naturalSorter(as, bs){
+        var a, b, a1, b1, i= 0, n, L,
+        rx=/(\.\d+)|(\d+(\.\d+)?)|([^\d.]+)|(\.\D+)|(\.$)/g;
+        if(as=== bs) return 0;
+        a= as.toLowerCase().match(rx);
+        b= bs.toLowerCase().match(rx);
+        L= a.length;
+        while(i<L){
+          if(!b[i]) return 1;
+          a1= a[i],
+          b1= b[i++];
+          if(a1!== b1){
+            n= a1-b1;
+            if(!isNaN(n)) return n;
+            return a1>b1? 1:-1;
           }
         }
-        // Handle 'completed', or its inverse, 'active'
-        var ifNotComplete = !(filterBy === 'completed');
-        return function(item) {
-          return item.isComplete !== ifNotComplete;
-        }
+        return b[i]? -1:0;
       }
     }
-  });
+  })
 </script>

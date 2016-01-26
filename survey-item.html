@@ -1,9 +1,10 @@
 <link rel="import" href="../show-once/show-once.html">
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../paper-button/paper-button.html">
-<link rel="import" href="../paper-material/paper-material.html">
 <link rel="import" href="../paper-input/paper-textarea.html">
+<link rel="import" href="../paper-material/paper-material.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-toggle-button/paper-toggle-button.html">
 <!--
 `<survey-item style="display:block" survey="{{item}}"></survey-item>`
 -->
@@ -18,9 +19,10 @@
     </template>
     <template is="dom-if" if="{{edit}}">
       <paper-textarea char-counter maxlength="25" value="{{survey.question::change}}" disabled label="Question"></paper-textarea>
-      <div id="surveyq">
-        <paper-icon-button style="color:gray; float:right; right: -50px; top: 15px;" icon="delete" aria-label="Delete Survey" tabindex="0" on-tap="_onDelete"></paper-icon-button>
-      </div>
+      Archive <paper-toggle-button checked={{survey.archive}}></paper-toggle-button>
+      <template is="dom-if" if="{{survey.archive}}">
+        <paper-icon-button style="color:gray;float:right" icon="delete" aria-label="Delete Survey" tabindex="0" on-tap="_onDelete"></paper-icon-button>
+      </template>
       <template is="dom-repeat" items="{{showData}}">
         {{item.title}}
         {{item.num}}
