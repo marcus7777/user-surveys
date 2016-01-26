@@ -1,4 +1,7 @@
 <link rel="import" href="surveys-view.html">
+<link rel="import" href="../iron-icons/iron-icons.html" async>
+<link rel="import" href="../iron-icon/iron-icon.html" async>
+
 <!--
 `<user-surveys answer edit edit-default folder="marcus7777"></user-surveys>` Surveys for users
 @demo demo.html
@@ -17,13 +20,15 @@
       margin: 15px 20px 0px 0px;
     }
     </style>
-    <surveys-view answer="[[answer]]" answered="[[answered]]" location="[[location]]" edit="{{edit}}" folder="[[surveysFolder]]" default-folder="{{surveysDefaultFolder}}" edit-default="{{editDefault}}"></surveys-view>
-    <template is="dom-if" if="{{editDefault}}">
+    <template is="dom-if" if="{{header}}">
       <div id="listofUserHeading" style="height: 50px; width: 100%; background-color: blue; padding: 2px 0 20px 20px; margin-bottom: 20px;">
         <h2 style="color: #FFF; float:left;">Surveys</h2>
         <iron-icon icon="account-circle"></iron-icon>
       </div>
-      <user-surveys edit location="[[location]]" filter-by="all" folder="[[defaultFolder]]"></user-surveys>
+    </template>
+    <surveys-view answer="[[answer]]" answered="[[answered]]" location="[[location]]" edit="{{edit}}" folder="[[surveysFolder]]" default-folder="{{surveysDefaultFolder}}" edit-default="{{editDefault}}"></surveys-view>
+    <template is="dom-if" if="{{editDefault}}">
+      <user-surveys header edit location="[[location]]" filter-by="all" folder="[[defaultFolder]]"></user-surveys>
     </template>
   </template>
 </dom-module>
