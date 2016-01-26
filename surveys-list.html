@@ -47,24 +47,21 @@
     deleteSurvey: function(e) {
       this.arrayDelete('surveys', e.detail.survey);
     },
-    filterSurvey: function() {
-      var _filterBy = this.filterBy 
-      return function(item) {
-        var include = false
-        if (_filterBy === 'all') {
-          include = true
-        }
-        if (item.isComplete === false && _filterBy === 'default' && !item.archive){
-          include = true
-        }
-        if (item.isComplete && _filterBy === 'completed' && !item.archive) {
-          include = true
-        }
-        if (item.archive && _filterBy === 'archive') {
-          include = true
-        }
-        return include
+    filterSurvey: function(item) {
+      var include = false
+      if (this.filterBy === 'all') {
+        include = true
       }
+      if (item.isComplete === false && this.filterBy === 'default' && !item.archive){
+        include = true
+      }
+      if (item.isComplete && this.filterBy === 'completed' && !item.archive) {
+        include = true
+      }
+      if (item.archive && this.filterBy === 'archive') {
+        include = true
+      }
+      return include
     },
     sortItems: function(a, b){
       if (a.order && b.order) {
