@@ -6,7 +6,7 @@
 <dom-module id="surveys-list">
   <template>
     <template is="dom-if" if="{{answered}}">
-      <template is="dom-repeat" items="{{surveys}}" filter="{{filterSurvey(filterBy)}}">
+      <template is="dom-repeat" items="{{surveys}}" filter="{{filterSurvey(filterBy)}}" sort="sortItems">
         <paper-material style="background:#fff;padding:20px;margin:5px;width:250px;float:left">
           <survey-item data="{{data}}" answered survey="{{item}}"></survey-item>
         </paper-material>
@@ -74,25 +74,25 @@
       } else if (a.value && b.value) {
         return naturalSorter (a.value, b.value)
       }
-    }
-  })
-  function naturalSorter(as, bs){
-    var a, b, a1, b1, i= 0, n, L,
-    rx=/(\.\d+)|(\d+(\.\d+)?)|([^\d.]+)|(\.\D+)|(\.$)/g;
-    if(as=== bs) return 0;
-    a= as.toLowerCase().match(rx);
-    b= bs.toLowerCase().match(rx);
-    L= a.length;
-    while(i<L){
-      if(!b[i]) return 1;
-      a1= a[i],
-      b1= b[i++];
-      if(a1!== b1){
-        n= a1-b1;
-        if(!isNaN(n)) return n;
-        return a1>b1? 1:-1;
+      function naturalSorter(as, bs){
+        var a, b, a1, b1, i= 0, n, L,
+        rx=/(\.\d+)|(\d+(\.\d+)?)|([^\d.]+)|(\.\D+)|(\.$)/g;
+        if(as=== bs) return 0;
+        a= as.toLowerCase().match(rx);
+        b= bs.toLowerCase().match(rx);
+        L= a.length;
+        while(i<L){
+          if(!b[i]) return 1;
+          a1= a[i],
+          b1= b[i++];
+          if(a1!== b1){
+            n= a1-b1;
+            if(!isNaN(n)) return n;
+            return a1>b1? 1:-1;
+          }
+        }
+        return b[i]? -1:0;
       }
     }
-    return b[i]? -1:0;
-  }
+  })
 </script>
