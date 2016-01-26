@@ -21,7 +21,7 @@
       <paper-textarea char-counter maxlength="25" value="{{survey.question::change}}" disabled label="Question"></paper-textarea>
       <paper-toggle-button checked={{survey.archive}}></paper-toggle-button>
       <template is="dom-if" if="{{survey.archive}}">
-        <paper-icon-button style="color:gray; float:right; right: -50px; top: 15px;" icon="delete" aria-label="Delete Survey" tabindex="0" on-tap="_onDelete"></paper-icon-button>
+        Archive <paper-icon-button style="color:gray; float:right; right: -50px; top: 15px;" icon="delete" aria-label="Delete Survey" tabindex="0" on-tap="_onDelete"></paper-icon-button>
       </template>
       <template is="dom-repeat" items="{{showData}}">
         {{item.title}}
