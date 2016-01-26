@@ -7,7 +7,7 @@
   <template>
     <template is="dom-if" if="{{answered}}">
       <template is="dom-repeat" items="{{surveys}}">
-        <paper-material style="background:#fff;padding:20px;margin:5px;width:250px; float:left;">
+        <paper-material style="background:#fff;padding:20px;margin:5px;width:250px;float:left">
           <survey-item data="{{data}}" answered survey="{{item}}"></survey-item>
         </paper-material>
       </template>
@@ -15,7 +15,7 @@
     <template is="dom-if" if="{{edit}}">
       <sortable-list style="display: inline-block; margin-left: 50px;">
         <template is="dom-repeat" items="{{surveys}}">
-          <paper-material style="background:#fff;padding:20px;margin:5px;width:250px; float:left;">
+          <paper-material style="background:#fff;padding:20px;margin:5px;width:250px;float:left">
             <survey-item data="{{data}}" edit survey="{{item}}" on-delete-survey="deleteSurvey"></survey-item>
           </paper-material>
         </template>
@@ -56,9 +56,17 @@
           }
         }
         // Handle 'completed', or its inverse, 'active'
-        var ifNotComplete = !(filterBy === 'completed');
+        var ifNotComplete = !(filterBy === 'completed')
+        var ifArchive = (filterBy === 'archive')
         return function(item) {
-          return item.isComplete !== ifNotComplete;
+          if (item.isComplete !== ifNotComplete) {
+            if (item.archive === ifArchive) {
+              return true
+            } else {
+              return false
+            }
+          }
+          return false
         }
       }
     }
