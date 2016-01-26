@@ -50,7 +50,9 @@
       this.arrayDelete('surveys', e.detail.survey);
     },
     updateList: function() {
-      this.$.edit.render()
+      if (this.$$('#edit')) {
+        this.$$('#edit').render()
+      }
     },
     filterSurvey: function(item) {
       var include = false
