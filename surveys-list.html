@@ -48,20 +48,18 @@
       this.arrayDelete('surveys', e.detail.survey);
     },
     filterSurvey: function(filterBy) {
-      if (filterBy) {
-        var ifNotComplete = !(filterBy === 'completed')
-        var ifArchive = (filterBy === 'archive')
+      var ifNotComplete = !(filterBy === 'completed')
+      var ifArchive = (filterBy === 'archive')
         
-        return function(item) {
-          if (item.isComplete !== ifNotComplete) {
-            if (item.archive === ifArchive) {
-              return true
-            } else {
-              return false
-            }
+      return function(item) {
+        if (item.isComplete !== ifNotComplete) {
+          if (item.archive === ifArchive) {
+            return true
+          } else {
+            return false
           }
-          return false
         }
+        return false
       }
     }
   });
