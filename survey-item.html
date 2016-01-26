@@ -11,9 +11,9 @@
   <template>
     <template is="dom-if" if="{{showOnce}}">
       <show-once>
-        Q: {{survey.question}}
-        <paper-button raised="1" on-tap="yes">{{Yes}}</paper-button>
-        <paper-button raised="1" on-tap="no">{{No}}</paper-button>
+        {{survey.question}}
+        <paper-button style="color: green; font-weight: 500; font-size: 20px;" on-tap="yes">{{Yes}}</paper-button>
+        <paper-button style="color: red; font-weight: 500; font-size: 20px;" on-tap="no">{{No}}</paper-button>
       </show-once>
     </template>
     <template is="dom-if" if="{{edit}}">
@@ -43,11 +43,11 @@
     </template>
     <template is="dom-if" if="{{answer}}">
       <div id="ques" style="margin-bottom: 30px;">
-        Q: [[survey.question]]
+        [[survey.question]]
       </div>
       <span>
-         <paper-button raised="1" on-tap="yes">{{Yes}}</paper-button>
-         <paper-button raised="1" on-tap="no">{{No}}</paper-button>
+         <paper-button style="color: green; font-weight: 500; font-size: 20px;" on-tap="yes">{{Yes}}</paper-button>
+         <paper-button style="color: red; font-weight: 500; font-size: 20px;" on-tap="no">{{No}}</paper-button>
       </span>
     </template>
   </template>
@@ -116,7 +116,7 @@ Polymer({
           console.log(data[peops].surveys[key])
         }
       }
-    } 
+    }
     return [{title: Yes, num: ansYes},{title: No, num: ansNo},{title: "Unanswered", num: unans}]
   },
   _onDelete: function() {
