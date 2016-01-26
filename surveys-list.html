@@ -13,8 +13,9 @@
       </template>
     </template>
     <template is="dom-if" if="{{edit}}">
-      <sortable-list style="display: inline-block; margin-left: 50px;">
-        <template is="dom-repeat" items="{{surveys}}" filter="filterSurvey" sort="sortItems">
+      Show Archive <paper-toggle-button change="updateList" checked="{{ShowArchive}}"></paper-toggle-button>
+      <sortable-list style="display:inline-block;margin-left: 50px">
+        <template id="edit" is="dom-repeat" items="{{surveys}}" filter="filterSurvey" sort="sortItems">
           <paper-material style="background:#fff;padding:20px;margin:5px;width:250px;float:left">
             <survey-item data="{{data}}" edit survey="{{item}}" on-delete-survey="deleteSurvey"></survey-item>
           </paper-material>
@@ -47,6 +48,9 @@
     deleteSurvey: function(e) {
       this.arrayDelete('surveys', e.detail.survey);
     },
+    updateList: function() {
+      this.$.edit.render()
+    },
     filterSurvey: function(item) {
       var include = false
       if (this.filterBy === 'all' && !item.archive) {
@@ -58,7 +62,7 @@
       if (item.isComplete && this.filterBy === 'completed' && !item.archive) {
         include = true
       }
-      if (item.archive && this.filterBy === 'archive') {
+      if (item.archive && this.ShowArchive) {
         include = true
       }
       return include
