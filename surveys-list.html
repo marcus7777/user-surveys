@@ -14,7 +14,7 @@
     </template>
     <template is="dom-if" if="{{edit}}">
       <sortable-list style="display: inline-block; margin-left: 50px;">
-        <template is="dom-repeat" items="{{surveys}}">
+        <template is="dom-repeat" items="{{surveys}}" filter="{{filterSurvey(filterBy)}}">
           <paper-material style="background:#fff;padding:20px;margin:5px;width:250px;float:left">
             <survey-item data="{{data}}" edit survey="{{item}}" on-delete-survey="deleteSurvey"></survey-item>
           </paper-material>
