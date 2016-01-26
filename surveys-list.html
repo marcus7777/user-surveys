@@ -49,7 +49,7 @@
     },
     filterSurvey: function(item) {
       var include = false
-      if (this.filterBy === 'all') {
+      if (this.filterBy === 'all' && !item.archive) {
         include = true
       }
       if (item.isComplete === false && this.filterBy === 'default' && !item.archive){
