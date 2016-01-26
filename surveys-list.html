@@ -49,15 +49,9 @@
     },
     filterSurvey: function(filterBy) {
       if (filterBy) {
-        // If filterBy is 'all', return a filter
-        if (filterBy === 'all') {
-          return function() {
-            return true
-          }
-        }
-        // Handle 'completed', or its inverse, 'active'
         var ifNotComplete = !(filterBy === 'completed')
         var ifArchive = (filterBy === 'archive')
+        
         return function(item) {
           if (item.isComplete !== ifNotComplete) {
             if (item.archive === ifArchive) {
