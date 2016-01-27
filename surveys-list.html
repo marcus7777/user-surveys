@@ -59,7 +59,7 @@
       if (this.filterBy === 'all' && !item.archive) {
         include = true
       }
-      if (item.isComplete === false && this.filterBy === 'default' && !item.archive){
+      if (!item.isComplete && this.filterBy === 'default' && !item.archive){
         include = true
       }
       if (item.isComplete && this.filterBy === 'completed' && !item.archive) {
