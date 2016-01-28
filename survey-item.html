@@ -13,8 +13,8 @@
     <template is="dom-if" if="{{showOnce}}">
       <show-once>
         {{survey.question}}
-        <paper-button on-tap="yes" style="color:green;">{{Yes}}</paper-button>
-        <paper-button on-tap="no" style="color:red;">{{No}}</paper-button>
+        <paper-button on-tap="yes" style="color:green; font-size: 20px; font-weight: 500;">{{Yes}}</paper-button>
+        <paper-button on-tap="no" style="color:red; font-size: 20px; font-weight: 500;">{{No}}</paper-button>
       </show-once>
     </template>
     <template is="dom-if" if="{{edit}}">
@@ -23,7 +23,7 @@
         <paper-toggle-button checked={{survey.archive}}></paper-toggle-button>
       </div>
       <div id="questionHere" style="float:left; clear:right; width: 250px; height: 170px;">
-        <paper-textarea char-counter maxlength="140" value="{{survey.question::change}}" disabled label="Question"></paper-textarea>
+        <paper-textarea char-counter maxlength="140" value="{{survey.question::change}}" disabled label="Question" style="color: red;"></paper-textarea>
       </div>
       <template is="dom-repeat" items="{{showData}}">
           <div id="results" style="float:left; clear: right; width: 140px;">
@@ -41,7 +41,7 @@
     </template>
     <template is="dom-if" if="{{answered}}">
       <div id="survques" style="margin:5px; font-size: 16px; font-weight: 200;">
-        {{survey.question}}
+          {{survey.question}}
         <br />
         <template is="dom-repeat" items="{{showData}}">
           {{item.title}} {{item.num}}
@@ -58,8 +58,8 @@
         [[survey.question]]
       </div>
       <span>
-         <paper-button rstyle="color:green;" on-tap="yes">{{Yes}}</paper-button>
-         <paper-button style="color:red;" on-tap="no">{{No}}</paper-button>
+         <paper-button rstyle="color:green;" on-tap="yes" style="font-size:20px; font-weight: 500;">{{Yes}}</paper-button>
+         <paper-button style="color:red;" on-tap="no" style="font-size:20px; font-weight: 500;">{{No}}</paper-button>
       </span>
     </template>
   </template>
