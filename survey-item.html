@@ -74,11 +74,11 @@
       });
     },
     yes: function() {
-      this.set("survey.answer", this.Yes)
+      this.survey.answer = this.Yes
       this.set("survey.isComplete", true)
     },
     no: function() {
-      this.set("survey.answer", this.No)
+      this.survey.answer = this.No
       this.set("survey.isComplete", true)
     },
     properties: {
