@@ -12,20 +12,31 @@
   <template>
     <template is="dom-if" if="{{showOnce}}">
       <show-once>
-        Q: {{survey.question}}
-        <paper-button raised="1" on-tap="yes">{{Yes}}</paper-button>
-        <paper-button raised="1" on-tap="no">{{No}}</paper-button>
+        {{survey.question}}
+        <paper-button on-tap="yes" style="color:green;">{{Yes}}</paper-button>
+        <paper-button on-tap="no" style="color:red;">{{No}}</paper-button>
       </show-once>
     </template>
     <template is="dom-if" if="{{edit}}">
-      <paper-textarea char-counter maxlength="25" value="{{survey.question::change}}" disabled label="Question"></paper-textarea>
-      Archive <paper-toggle-button checked={{survey.archive}}></paper-toggle-button>
+      <div id="archiveButton" style="float:right; ">
+        Archive
+        <paper-toggle-button checked={{survey.archive}}></paper-toggle-button>
+      </div>
+      <div id="questionHere" style="float:left; clear:right; width: 250px; height: 170px;">
+        <paper-textarea char-counter maxlength="140" value="{{survey.question::change}}" disabled label="Question"></paper-textarea>
+      </div>
+      <template is="dom-repeat" items="{{showData}}">
+          <div id="results" style="float:left; clear: right; width: 140px;">
+            <div id="surveyTitle" style="width: 100px; float: left;">
+              {{item.title}}
+            </div>
+            <div id="surveyResults">
+              {{item.num}}
+            </div>
+          </div>
+      </template>
       <template is="dom-if" if="{{survey.archive}}">
         <paper-icon-button style="color:gray;float:right" icon="delete" aria-label="Delete Survey" tabindex="0" on-tap="_onDelete"></paper-icon-button>
-      </template>
-      <template is="dom-repeat" items="{{showData}}">
-        {{item.title}}
-        {{item.num}}
       </template>
     </template>
     <template is="dom-if" if="{{answered}}">
@@ -33,8 +44,7 @@
         {{survey.question}}
         <br />
         <template is="dom-repeat" items="{{showData}}">
-          {{item.title}}
-          {{item.num}}
+          {{item.title}} {{item.num}}
         </template>
       </div>
       <template is="dom-if" if="{{survey.answer}}">
@@ -45,86 +55,105 @@
     </template>
     <template is="dom-if" if="{{answer}}">
       <div id="ques" style="margin-bottom: 30px;">
-        Q: [[survey.question]]
+        [[survey.question]]
       </div>
       <span>
-         <paper-button raised="1" on-tap="yes">{{Yes}}</paper-button>
-         <paper-button raised="1" on-tap="no">{{No}}</paper-button>
+         <paper-button rstyle="color:green;" on-tap="yes">{{Yes}}</paper-button>
+         <paper-button style="color:red;" on-tap="no">{{No}}</paper-button>
       </span>
     </template>
   </template>
 </dom-module>
 <script>
-var shown
-Polymer({
-  is: 'survey-item',
-  _onDelete: function() {
-    this.fire('delete-survey-question', {
-      survey: this.survey
-    });
-  },
-  yes: function() {
-    this.set("survey.answer", this.Yes)
-    this.set("survey.isComplete", true)
-  },
-  no: function() {
-    this.set("survey.answer", this.No)
-    this.set("survey.isComplete", true)
-  },
-  properties: {
-    edit: {
-      type: Boolean,
-      value: false
+  var shown
+  Polymer({
+    is: 'survey-item',
+    _onDelete: function() {
+      this.fire('delete-survey-question', {
+        survey: this.survey
+      });
     },
-    answer: {
-      type: Boolean,
-      value: false
+    yes: function() {
+      this.set("survey.answer", this.Yes)
+      this.set("survey.isComplete", true)
     },
-    answered: {
-      type: Boolean,
-      value: false
+    no: function() {
+      this.set("survey.answer", this.No)
+      this.set("survey.isComplete", true)
     },
-    No: { value: 'No' },
-    Yes: { value: 'Yes' },
-    survey: { notify: true },
-    showOnce: { computed: "getShowOnce(edit, answer, index)" },
-    showData: { computed: "getShowData(survey, data, Yes, No)" }
-  },
-  getShowOnce: function(edit, answer, index) {
-    if (!shown && index === 0) {
-      shown = true
-      return (!edit && answer)
-    } else {
-      return false
-    }
-  },
-  getShowData: function(survey, data, Yes, No) {
-    var ansYes = 0
-    var ansNo = 0
-    var unans = -1 //DOTO do not count default
+    properties: {
+      edit: {
+        type: Boolean,
+        value: false
+      },
+      answer: {
+        type: Boolean,
+        value: false
+      },
+      answered: {
+        type: Boolean,
+        value: false
+      },
+      No: {
+        value: 'No'
+      },
+      Yes: {
+        value: 'Yes'
+      },
+      survey: {
+        notify: true
+      },
+      showOnce: {
+        computed: "getShowOnce(edit, answer, index)"
+      },
+      showData: {
+        computed: "getShowData(survey, data, Yes, No)"
+      }
+    },
+    getShowOnce: function(edit, answer, index) {
+      if (!shown && index === 0) {
+        shown = true
+        return (!edit && answer)
+      } else {
+        return false
+      }
+    },
+    getShowData: function(survey, data, Yes, No) {
+      var ansYes = 0
+      var ansNo = 0
+      var unans = -1 //DOTO do not count default
 
-    for (peops in data) {
-      for (key in data[peops].surveys) {
-        if (data[peops].surveys[key].question === survey.question) {
-          if (data[peops].surveys[key].isComplete ) {
-            if (data[peops].surveys[key].answer === Yes ) {
-              ansYes = ansYes + 1
+      for (peops in data) {
+        for (key in data[peops].surveys) {
+          if (data[peops].surveys[key].question === survey.question) {
+            if (data[peops].surveys[key].isComplete) {
+              if (data[peops].surveys[key].answer === Yes) {
+                ansYes = ansYes + 1
+              } else {
+                ansNo = ansNo + 1
+              }
             } else {
-              ansNo = ansNo + 1
+              unans = unans + 1
             }
-          } else {
-            unans = unans + 1
+            console.log(data[peops].surveys[key])
           }
-          console.log(data[peops].surveys[key])
         }
       }
-    } 
-    return [{title: Yes, num: ansYes},{title: No, num: ansNo},{title: "Unanswered", num: unans}]
-  },
-  _onDelete: function() {
-    this.fire('delete-survey', {
-      survey: this.survey
-    })
-  }
-});
+      return [{
+        title: Yes,
+        num: ansYes
+      }, {
+        title: No,
+        num: ansNo
+      }, {
+        title: "Unanswered",
+        num: unans
+      }]
+    },
+    _onDelete: function() {
+      this.fire('delete-survey', {
+        survey: this.survey
+      })
+    }
+  });
 </script>
