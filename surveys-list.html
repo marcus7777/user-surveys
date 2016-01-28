@@ -13,8 +13,10 @@
       </template>
     </template>
     <template is="dom-if" if="{{edit}}">
-      Show Archive <paper-toggle-button checked="{{showArchive}}"></paper-toggle-button>
-      <sortable-list style="display:inline-block;margin-left:50px">
+      <paper-material elevation="1" style="width: 120px;padding: 0 0 10px 10px; float: right; clear: left;">
+        <h3>Show Archive</h3><paper-toggle-button checked="{{showArchive}}"></paper-toggle-button>
+      </paper-material>
+      <sortable-list style="display:inline-block;margin-left:50px; float: left; clear: right;">
         <template id="edit" is="dom-repeat" items="{{surveys}}" filter="filterSurvey" sort="sortItems">
           <paper-material style="background:#fff;padding:20px;margin:5px;width:250px;float:left">
             <survey-item data="{{data}}" edit survey="{{item}}" on-delete-survey="deleteSurvey"></survey-item>
