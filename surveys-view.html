@@ -8,8 +8,8 @@
 
 <dom-module id="surveys-view">
   <template>
-    <mediator-data data-all="{{dataAll}}" id="s" sync='["question"]' as-array="{{surveys}}" location="{{location}}" folder="[[folder]]" default-folder="{{defaultFolder}}"></mediator-data>
-    <surveys-list filter-by="{{filterBy}}" data="{{dataAll}}" edit="[[edit]]" answer="[[answer]]" answered="[[answered]]" edit-default="[[editDefault]]" surveys="{{surveys}}" on-delete-survey="deleteSurveyQuestion"></surveys-list>
+    <mediator-data id="s" sync='["question"]' as-array="{{surveys}}" location="{{location}}" folder="[[folder]]" default-folder="{{defaultFolder}}"></mediator-data>
+    <surveys-list filter-by="{{filterBy}}" data="{{surveysData}}" edit="[[edit]]" answer="[[answer]]" answered="[[answered]]" edit-default="[[editDefault]]" surveys="{{surveys}}" on-delete-survey="deleteSurveyQuestion"></surveys-list>
     <template is="dom-if" if="{{edit}}">
       <survey-input on-add-survey="addSurveyQuestion"></survey-input>
     </template>
