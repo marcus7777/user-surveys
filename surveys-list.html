@@ -26,7 +26,7 @@
     </template>
     <!-- Survey Questions in the Account -->
     <template is="dom-if" if="{{answer}}">
-      <template is="dom-if" if="{{!surveys.length}}">
+      <template is="dom-if" if="{{done}}">
         <h4>Thank you for you time. All Questions Answered.</h4>
       </template>
       <template is="dom-repeat" items="{{surveys}}" filter="filterSurvey" sort="sortItems">
@@ -46,7 +46,11 @@
       answer: {type: Boolean, value: false},
       answered: {type: Boolean, value: false},
       filterBy: {type:String,value:"default"},
-      showArchive: {observer:"updateList"}
+      showArchive: {observer:"updateList"},
+      done: {computed:"getDone(surveys)"}
+    },
+    getDone: function(surveys) {
+      return surveys.length === 0
     },
     deleteSurvey: function(e) {
       this.arrayDelete('surveys', e.detail.survey);
