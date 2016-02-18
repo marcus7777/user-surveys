@@ -23,9 +23,9 @@
       margin: 15px 20px 0px 0px;
     }
     </style>
-    <surveys-view filter-by="{{filterBy}}" answer="[[answer]]" answered="[[answered]]" location="[[location]]" edit="{{edit}}" folder="[[surveysFolder]]" default-folder="{{surveysDefaultFolder}}" edit-default="{{editDefault}}"></surveys-view>
+    <surveys-view surveys-data="{{surveysData}}" filter-by="{{filterBy}}" answer="[[answer]]" answered="[[answered]]" location="[[location]]" edit="{{edit}}" folder="[[surveysFolder]]" default-folder="{{surveysDefaultFolder}}" edit-default="{{editDefault}}"></surveys-view>
     <template is="dom-if" if="{{editDefault}}">
-      <user-surveys edit location="[[location]]" filter-by="all" folder="[[defaultFolder]]"></user-surveys>
+      <user-surveys surveys-data="{{surveysData}}" edit location="[[location]]" filter-by="all" folder="[[defaultFolder]]"></user-surveys>
     </template>
   </template>
 </dom-module>
@@ -59,6 +59,9 @@ Polymer({
     },
     surveysDefaultFolder: {
       computed: "getSurveysDefaultFolder(defaultFolder)"
+    },
+    surveysData: {
+      type: Object
     }
   },
   getSurveysFolder: function(folder) {
