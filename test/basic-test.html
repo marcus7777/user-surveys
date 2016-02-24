@@ -24,7 +24,7 @@
       teardown(function () {
         //...
       });
-      suite('basic usage', function () {
+      setTimeout(suite('basic usage', function () {
               // TODO CORE Admin Creates a Survey an the Data is Created
               // test('firebase path of survey is created in admin', function(done) {
               //
@@ -71,7 +71,7 @@
               // TODO Admin cannot see the Survey
 
               // TODO User Cannot See the Survey
-        })
+        }), 3000)
       })
     </script>
   </body>
