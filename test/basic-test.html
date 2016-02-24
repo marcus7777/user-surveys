@@ -35,7 +35,7 @@
               // TODO CORE Admin can see Survey Question
         
         test('admin can see survey card question element is not empty', function(done) {
-          setTimeout(timeouted.bind(this), 2000)
+          setTimeout(timeouted.bind(this, userSurveys), 2000)
           function timeouted(){ 
             var adminQuestion = userSurveys.querySelector('#questionHere')
             debugger
