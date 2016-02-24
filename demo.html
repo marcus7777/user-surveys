@@ -6,11 +6,11 @@
     <link rel="import" href="user-surveys.html">
   </head>
   <body>
-    Edit default <paper-toggle-button checked="{{editDefault}}"></paper-toggle-button>
     <div style="clear:both">
       <template is="dom-bind">
-        <h3>user-surveys edit-default</h3>
-        <user-surveys edit-default="{{editDefault}}" folder="marcus7777" location="https://open-elements.firebaseio.com/all/"></user-surveys>
+        <h3>user-surveys</h3>
+        Edit default <paper-toggle-button checked="{{editDefault}}"></paper-toggle-button>
+        <user-surveys edit-default="{{editDefault}}" answer="{{!editDefault}}" folder="marcus7777" location="https://open-elements.firebaseio.com/all/"></user-surveys>
       </template>  
     </div>
     <a href="https://open-elements.firebaseio.com/all/" >data</a>
