@@ -24,7 +24,7 @@
       teardown(function () {
         //...
       });
-      function timeouted(){ suite('basic usage', function () {
+      suite('basic usage', function () {
               // TODO CORE Admin Creates a Survey an the Data is Created
               // test('firebase path of survey is created in admin', function(done) {
               //
@@ -33,10 +33,15 @@
               //
               // });
               // TODO CORE Admin can see Survey Question
+        
         test('admin can see survey card question element is not empty', function(done) {
-          var adminQuestion = userSurveys.querySelector('#questionHere')
-          debugger
-          assert.isFalse(adminQuestion.textContent, '')
+          setTimeout(timeouted.bind(this), 2000)
+          function timeouted(){ 
+            var adminQuestion = userSurveys.querySelector('#questionHere')
+            debugger
+            assert.isFalse(adminQuestion.textContent, '')
+            done()
+          }
         })
               // TODO CORE User can see Survey Question
         test('user can see survey card element with the question is not empty', function(done) {
@@ -57,8 +62,8 @@
               // TODO Admin Archives and Deletes the Survey so the Data Path Deletes
               // TODO Admin cannot see the Survey
               // TODO User Cannot See the Survey
-        })}
-        setTimeout(timeouted.bind(this), 3000)
+        })
+        
       })
     </script>
   </body>
