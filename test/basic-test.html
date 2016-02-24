@@ -39,7 +39,7 @@
         test('admin can see user-survey element is not empty', function(done) {
           setTimeout(timeouted.bind(this, userSurveys), 2000)
           function timeouted(){
-            assert.isFalse(userSurveys[1].innerText, '')
+            assert.isFalse(userSurveys.innerText, '')
             done()
           }
         })
