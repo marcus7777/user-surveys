@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <!-- Step 1: import the element to test -->
+    <link rel="import" href="../user-surveys.html">
+  </head>
+  <body>
+
+    <test-fixture id="userSurveys">
+          <template>
+            <user-surveys></user-surveys>
+          </template>
+        </test-fixture>
+        <script>
+          suite('<user-surveys>', function () {
+            var userSurveys;
+            userSurveys = fixture('userSurveys');
+            setup(function () {
+            });
+            teardown(function () {
+              //...
+            });
+            suite('basic usage', function () {
+              // Admin Creates a Survey an the Data is Created
+              test('firebase path of survey is created in admin', function(done) {
+
+              });
+              test('firebase path of survey is created in user', function(done) {
+
+              });
+              // Admin and User can see the Survey
+              test('admin can see survey card element with the question and unaswered equal to the number of users and answered equal to 0', function(done) {
+
+              });
+              test('user can see survey card element with the question and the ability to answer', function(done) {
+
+              });
+            });
+          });
+        </script>
+
+  </body>
+</html>
