@@ -1,0 +1,23 @@
+{
+  "name": "pouch-db",
+  "description": "pap-t",
+  "main": "pouch-db.html",
+  "keywords": [
+    "polymer",
+    "web-components"
+  ],
+  "dependencies": {
+    "polymer": "*",
+    "pouchdb": "pouchdb/pouchdb"
+  },
+  "homepage": "https://github.com/marcus7777/pouch-db",
+  "_release": "f4e2f0af02",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "f4e2f0af02cd5eb0b9eb146816efd003694fa7d9"
+  },
+  "_source": "git://github.com/marcus7777/pouch-db.git",
+  "_target": "*",
+  "_originalSource": "marcus7777/pouch-db"
+}

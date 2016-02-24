@@ -1,0 +1,24 @@
+{
+  "name": "show-once",
+  "description": "show-once",
+  "main": "show-once.html",
+  "keywords": [
+    "polymer",
+    "web-components",
+    "cookies"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0",
+    "iron-localstorage": "PolymerElements/iron-localstorage"
+  },
+  "homepage": "https://github.com/marcus7777/show-once",
+  "_release": "ab5d88ca64",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "ab5d88ca642a099596dd0be94990b186e8be4106"
+  },
+  "_source": "git://github.com/marcus7777/show-once.git",
+  "_target": "*",
+  "_originalSource": "marcus7777/show-once"
+}

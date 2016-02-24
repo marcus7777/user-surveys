@@ -1,0 +1,13 @@
+{
+  "name": "pouch-db",
+  "version": "1.0.0",
+  "description": "pap-t",
+  "main": "pouch-db.html",
+  "keywords": [
+    "polymer","web-components"
+  ],
+  "dependencies": {
+    "polymer": "*",
+    "pouchdb":"pouchdb/pouchdb"
+  }
+}

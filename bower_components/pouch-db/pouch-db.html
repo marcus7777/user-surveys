@@ -1,0 +1,149 @@
+<link rel="import" href="../polymer/polymer.html">
+<script src="../pouchdb/dist/pouchdb.min.js"></script>
+<script>
+/**
+ * `<pouch-db>` 
+ * @demo demo.html 
+ *
+ **/
+  var thatPouchDb
+  var db_polymer = new PouchDB("polymer", {revs_limit: 1, auto_compaction: true})
+  var cache_db_polymer = {}
+  
+  var changes = db_polymer.changes({
+    since: 'now',
+    live: true,
+    include_docs: true
+  }).on('change', function(change) {
+    // handle change
+    if (change.id === hash(thatPouchDb.name)) {
+      thatPouchDb.set("savedData",change.doc.data)
+    } else {
+      // thatPouchDb.load(thatPouchDb.name)
+    }
+  }).on('complete', function(info) {
+    // changes() was canceled
+  }).on('error', function (err) {
+    console.log(err);
+  })
+  
+  Polymer({
+    is: "pouch-db",
+    properties: {
+      name: {type:String},
+      saved: {notify:true,computed:"saveData(name, data, drop)"},
+      savedData: {type:Object, notify:true},
+      loaded: {computed:"load(name)"},
+      drop: {type: Array, value: ["log"]}
+    },
+    load: function(name) {
+      thatPouchDb = this
+      if (cache_db_polymer.hasOwnProperty(hash(name))) {
+        if (thatPouchDb.savedData !== cache_db_polymer[hash(name)]) {
+          thatPouchDb.set("savedData",cache_db_polymer[hash(name)])
+        }
+      } else {
+        db_polymer.get(hash(name)).then(function(doc) {
+          if (Object.keys(doc.data).length !== 0) {
+            thatPouchDb.savedData = doc.data
+            cache_db_polymer[hash(name)] = doc.data
+          }
+        }).catch(function (err) {
+          console.log("err",err)
+        })
+      }
+      return true
+    },
+    saveData: function(name, dataAll, drop) {
+      thatPouchDb = this
+      data = dropData(dataAll, drop)
+      if (this.savedData !== data) {
+        this.set("savedData",data)
+        db_polymer.get(hash(name)).then(function(doc) {
+          if (Object.keys(doc.data).length !== 0) {
+            console.log("doc.data",doc.data)
+            thatPouchDb.savedData = doc.data
+            return db_polymer.put({
+              _id: hash(name),
+              _rev: doc._rev,
+              data: data
+            })
+          }
+        }).catch(function (err) {
+          if (err.name === "conflict" || err.name === "not_found") {
+            if (data && thatPouchDb.savedData) {
+              db_polymer.put({
+                _id: hash(name),
+                data: data
+              }).then(function (response) {
+                console.log("response",response)
+              }).catch(function (err2) {
+                console.log("err 2",err2)
+              })
+            } else if (data && thatPouchDb.savedData !== data) {
+              thatPouchDb.savedData = data
+            } else {
+              console.log("no data",err)
+            }
+          } else if (err.reason=== "QuotaExceededError"){
+            db_polymer.destroy().then(function (response) {
+              db_polymer = new PouchDB("polymer", {revs_limit: 1, auto_compaction: true})
+              db_polymer.put({
+                _id: hash(name),
+                data: data
+              }).then(function (response) {
+                console.log("response",response)
+              }).catch(function (err4) {
+                console.log("err 4",err4)
+              })
+              thatPouchDb.savedData = doc.data
+              thatPouchDb.load(hash(name))
+            }).catch(function (err3) {
+              console.log("QuotaExceededError destroy err", err3 )
+            });
+            console.log("err other",err)
+          }
+        })
+        return true
+      }
+      return true
+    }
+  });
+  function hash(message) {
+    var hash = 0
+    if (message.length == 0) return hash
+    for (i = 0;i < message.length;i++) {
+      var char = message.charCodeAt(i)
+      hash = ((hash<<5)-hash)+char
+      hash = hash & hash // Convert to 32bit integer
+    }
+    return hex32(hash);
+  }
+  function hex32(val) {
+    val &= 0xFFFFFFFF
+    var hex = val.toString(16).toUpperCase()
+    return ("00000000" + hex).slice(-8)
+  }
+  function dropData(data, drop) {
+    var output = {}
+    if (Array.isArray(drop) && drop.length !== 0 && typeof data === 'object' && data !== null) {
+      Object.keys(data).forEach(function(key) {
+        if (drop.indexOf(key) === -1) { 
+          if (typeof data[key] === 'string') {
+            output[key] = data[key] 
+          } else {
+            output[key] = {}
+            Object.keys(data[key]).forEach(function(key2) {
+              if (drop.indexOf(key2) === -1) { 
+                output[key][key2] = data[key][key2]
+              }
+            })
+          }
+        }
+      })
+    } else {
+      output = data
+    }
+    return output
+  }
+</script>

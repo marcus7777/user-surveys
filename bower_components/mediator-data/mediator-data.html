@@ -1,0 +1,211 @@
+<link rel="import" href="../pouch-db/pouch-db.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+<!--
+`<mediator-data location="https://mediator-data.firebaseio-demo.com" data="{{data}}" folder="{{folder}}"></mediator-data>` 
+@demo demo.html todo and badges
+@demo badges.demo.html badges
+-->
+
+<dom-module id="mediator-data">
+  <template>
+    <iron-ajax auto url="{{setDataUrl}}" last-response="{{data}}"></iron-ajax>
+  
+    <pouch-db id="local" name="{{setDataUrl}}" data="{{data}}" drop='["log"]' saved-data="{{savedData}}"></pouch-db>
+    
+    <iron-ajax id="set" method="PUT" url="{{setDataUrl}}" ></iron-ajax>
+    <iron-ajax auto url="{{defaultDataUrl}}" last-response="{{defaultData}}"></iron-ajax>
+    
+  </template>
+</dom-module>
+<script>
+;(function () {
+  function pad(num, size) {
+    var s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
+  }
+  Polymer({
+    is: 'mediator-data',
+    properties: {
+      dataUrl: {computed:'getDataUrl(location)'},
+      setDataUrl: {computed:'getSetDataUrl(location, _folder)'},
+      defaultDataUrl: {computed:'getSetDataUrl(location, defaultFolder)'},
+      location: {type: String},
+      defaultFolder: {type: String, value: 'default'},
+      folder: {type: String},
+      data: {notify: true},
+      asArray: {notify: true},
+      editDefault:{type: Boolean, value: false},
+      sync: {type: Array, value: []},
+      _folder: {computed:'get_folder(editDefault, defaultFolder, folder)'},
+      getUntilData: {value:false, type: Boolean}
+    },
+    observers: [
+      "load(data, defaultData, sync)",
+      "syncAsArray(data.*)",
+      "syncData(asArray.*)",
+      "setData(data.*, setDataUrl, gotData)",
+      "localLoad(savedData)"
+    ],
+    localLoad: function(savedData) {
+      if (!this.data && savedData && Object.keys(savedData).length !== 0) {
+        this.set("data", savedData)
+      }
+    },
+    syncAsArray: function(data) {
+      if (data.base) {
+        var asA = objectToArray(data.base)
+        if (JSON.stringify(this.asArray) !== JSON.stringify(asA)) {
+          this.set("asArray", asA)
+        }
+      }
+    },
+    syncData: function(asArray) {
+      if (asArray.path.indexOf('asArray.#') !== -1) {
+        if (!this.data) this.data = {}
+        var keys = Object.keys(this.data)
+        var re = /(?:asArray\.#)([0-9]*)/; 
+        var key = re.exec(asArray.path)[1] * 1
+        var re2 = /(?:asArray\.#)(?:[0-9]*)\.(.*)/;
+        var innerKey = ''
+        if (re2.test(asArray.path)) {
+          innerKey = '.'+re2.exec(asArray.path)[1]
+        }
+        if (this.asArray.hasOwnProperty(key)) {
+          this.set('data.'+keys[key]+innerKey, asArray.value)
+        } else {
+          console.log("del it todo")
+        }
+      } else if (asArray.path === 'asArray.splices') {
+        if (asArray.value.keySplices[0].added.length === 0) {
+          var copyTo = {}
+          for (var index = 0; index < asArray.base.length; index++) {
+            copyTo[pad(index,3)] = asArray.base[index]
+          }
+          this.set("data", copyTo)
+        } else {
+          this.push(asArray.base.pop())
+        }
+      } else if (asArray.path === 'asArray' && this.data) {
+      /* 
+       * fires if all array is changed maybe other time too
+       */
+      //  var output = {}
+      //  asArray.base.forEach(addArrayElements)
+      //  function addArrayElements(element, index, array) {
+      //    output[pad(index, 3)] = element
+      //  }
+      //  this.set("data",output)
+      } else if (asArray.path === "asArray.length") {
+        
+      }
+      
+    },
+    load: function (data, defaultData, sync) {
+      data = data || defaultData
+      if (JSON.stringify(data) !== JSON.stringify(this.data)) {
+        if (sync.length !== 0) {
+          this.set("data", this.addUniques(data, defaultData, sync))
+        } else {
+          this.set("data", data)
+        }
+      }
+      this.gotData = JSON.stringify(data)
+    },
+    getDataUrl: function(location){
+      if (location.substring(location.length - 1) === '/') {
+        location = location.substring(0,location.length - 1)
+      }
+      if (location.indexOf("firebase")) {
+        return location + "/.json"
+      } else {
+        return location
+      }
+    },
+    get_folder: function(editDefault, defaultFolder, folder){
+      if (editDefault) {
+        return defaultFolder
+      } else {
+        return folder
+      }
+    },
+    setData: function(data, setDataUrl, gotData){
+      if (setDataUrl && JSON.stringify(data.base) !== gotData) {
+        this.$.set.headers = {'content-type':'application/json'}
+        this.$.set.body = JSON.stringify(data.base)
+        this.$.set.generateRequest()
+      }
+    },
+    getSetDataUrl: function(location, folder) {
+      if (location.substring(location.length - 1) === '/') {
+        location = location.substring(0,location.length - 1)
+      }
+      if (location.indexOf("firebase")) {
+        if (folder === '') {
+          return location + "/.json"
+        } else {
+          return location + "/" + folder + "/.json"
+        }
+      } else {
+        return location + "/" + folder
+      }
+    },
+    push: function(obj){
+      var folder = this._folder
+      
+      if (this.data) {
+        var num = Object.keys(this.data).length + 1
+        var key = pad(num,3)
+        
+        if (!this.data.hasOwnProperty(key)) {
+          this.set("data."+key, obj)
+        } else {
+          this.set("data."+key+"-"+pad(Math.floor(Math.random()*10000),4), obj)
+        }
+      } else {
+        this.set("data", {"001": obj})
+      }
+    },
+    addUniques: function(data, _default, sync) {
+      var output = data
+      if (_default && Array.isArray(sync)) {
+        for (defaultKey in _default) {
+          if (_default.hasOwnProperty(defaultKey)) {
+            defaultItem = _default[defaultKey]
+            var gotToGet = sync.length
+            for (key in data) {
+              var item = data[key]
+              for (syncKey in sync) {
+                if (sync.hasOwnProperty(syncKey)) {
+                  var syncItem = sync[syncKey]
+                  if (item[syncItem] && defaultItem[syncItem]) {
+                    if (item[syncItem] === defaultItem[syncItem]) {
+                      gotToGet = gotToGet - 1
+                    }
+                  } else {
+                    gotToGet = 0
+                  }
+                }
+              }
+            }
+          }
+          if (gotToGet !== 0) {
+            this.push(defaultItem)
+          }
+        }
+      }
+      return output
+    }
+  })
+  function objectToArray(data) {
+    var output = []
+    if (data) {
+      var keys = Object.keys(data)
+      for (var i = 0; i < keys.length; i++) {
+        output.push(data[keys[i]])
+      }
+    }
+    return output
+  }
+})()
+</script>

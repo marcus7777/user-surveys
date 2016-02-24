@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <title>pouch-db demo</title>
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="pouch-db.html">
+    <link rel="import" href="../paper-input/paper-input.html">
+  </head>
+  <body>
+    <h3>pouch-db Demo</h3>
+    <template is="dom-bind">
+      <pouch-db data="{{data}}" saved-data="{{savedData}}"></pouch-db>
+      <paper-input label='data' value='{{data}}'></paper-input>
+      <paper-input label='saved' value='{{savedData}}'></paper-input>
+    </template>
+  </body>
+</html>

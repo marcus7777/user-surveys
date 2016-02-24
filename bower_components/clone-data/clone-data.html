@@ -1,0 +1,24 @@
+<link rel="import" href="../polymer/polymer.html">
+<script>
+  /**
+   * `<clone-data from="{{data}}" to="{{copy}}"></clone-data>` [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
+   *  clones data `from` to `to` Just arrays at moment
+   **/
+  Polymer({
+    is: "clone-data",
+    properties: {
+      to: {computed: "_getTo(from)", notify:true, type: Array},
+      from: Array
+    },
+    _getTo: function(from) {
+      to = []
+      for (var i = 0; i < from.length; i++) {
+        to.push(from[i])
+      }
+      
+      if (to.length > 0) {
+        return to
+      }
+    }
+  });
+</script>
