@@ -35,13 +35,14 @@
               // test('firebase path of survey is created in user', function(done) {
               //
               // });
-              // TODO CORE Admin and User can see the Survey
+              // TODO CORE Admin can see Survey Question
               test('admin can see survey card question element is not empty ', function(done) {
                 adminQuestion = userSurveys.querySelector('#questionHere');
                 assert.isFalse(questionText.textContent, '');
               });
-              test('user can see survey card element with the question', function(done) {
-                userQuestion = userSurveys.querySelector('#questionHere');
+              // TODO CORE User can see Survey Question
+              test('user can see survey card element with the question is not empty', function(done) {
+                userQuestion = userSurveys.querySelector('#ques');
                 assert.isFalse(questionText.textContent, '');
               });
 
