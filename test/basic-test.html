@@ -11,8 +11,10 @@
 <body>
   <test-fixture id="userSurveys">
     <template>
-      Edit default <paper-toggle-button checked="{{editDefault}}"></paper-toggle-button> {{editDefault}}
-      <user-surveys edit-default="{{editDefault}}" edit="{{editDefault}}" answer="{{!editDefault}}" folder="marcus7777" location="https://open-elements.firebaseio.com/all/"></user-surveys>
+      <template is="dom-bind">
+        Edit default <paper-toggle-button checked="{{editDefault}}"></paper-toggle-button> {{editDefault}}
+        <user-surveys edit-default="{{editDefault}}" edit="{{editDefault}}" answer="{{!editDefault}}" folder="marcus7777" location="https://open-elements.firebaseio.com/all/"></user-surveys>
+      </template>
     </template>
   </test-fixture>
   <script>
@@ -34,12 +36,10 @@
               // });
               // TODO CORE Admin can see Survey Question
         
-        test('admin can see survey card question element is not empty', function(done) {
+        test('admin can see user-survey element is not empty', function(done) {
           setTimeout(timeouted.bind(this, userSurveys), 2000)
-          function timeouted(){ 
-            var adminQuestion = userSurveys.querySelector('#questionHere')
-            debugger
-            assert.isFalse(adminQuestion.textContent, '')
+          function timeouted(){
+            assert.isFalse(userSurveys[1].innerText, '')
             done()
           }
         })
