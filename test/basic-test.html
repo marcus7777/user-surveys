@@ -34,7 +34,8 @@
               });
               // TODO CORE Admin and User can see the Survey
               test('admin can see survey card element with the question and unaswered equal to the number of users and answered equal to 0', function(done) {
-
+                questionText = userSurveys.querySelector('#questionHere');
+                assert.equal(questionText.textContent, '');
               });
               test('user can see survey card element with the question and the ability to answer', function(done) {
 
