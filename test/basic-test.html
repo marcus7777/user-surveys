@@ -1,32 +1,30 @@
 <html>
 <head>
-    <title>user-surveys</title>
-    <script src="../../webcomponentsjs/webcomponents.js"></script>
-    <script src="../../web-component-tester/browser.js"></script>
-    <script src="../../test-fixture/test-fixture-mocha.js"></script>
-    <link rel="import" href="../../polymer/polymer.html">
-    <link rel="import" href="../../test-fixture/test-fixture.html">
-    <link rel="import" href="../user-surveys.html">
-  </head>
-  <body>
-
-    <test-fixture id="userSurveys">
-          <template>
-            Edit default <paper-toggle-button checked="{{editDefault}}"></paper-toggle-button> {{editDefault}}
-            <user-surveys edit-default="{{editDefault}}" edit="{{editDefault}}" answer="{{!editDefault}}" folder="marcus7777" location="https://open-elements.firebaseio.com/all/"></user-surveys>
-          </template>
-        </test-fixture>
-        <script>
-          suite('<user-surveys>', function () {
-            var userSurveys;
-            
-            setup(function () {
-              userSurveys = fixture('userSurveys')
-            });
-            teardown(function () {
-              //...
-            });
-            suite('basic usage', function () {
+  <title>user-surveys</title>
+  <script src="../../webcomponentsjs/webcomponents.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../test-fixture/test-fixture-mocha.js"></script>
+  <link rel="import" href="../../polymer/polymer.html">
+  <link rel="import" href="../../test-fixture/test-fixture.html">
+  <link rel="import" href="../user-surveys.html">
+</head>
+<body>
+  <test-fixture id="userSurveys">
+    <template>
+      Edit default <paper-toggle-button checked="{{editDefault}}"></paper-toggle-button> {{editDefault}}
+      <user-surveys edit-default="{{editDefault}}" edit="{{editDefault}}" answer="{{!editDefault}}" folder="marcus7777" location="https://open-elements.firebaseio.com/all/"></user-surveys>
+    </template>
+  </test-fixture>
+  <script>
+    suite('<user-surveys>', function () {
+      var userSurveys;
+      setup(function () {
+        userSurveys = fixture('userSurveys')
+      });
+      teardown(function () {
+        //...
+      });
+      suite('basic usage', function () {
               // TODO CORE Admin Creates a Survey an the Data is Created
               // test('firebase path of survey is created in admin', function(done) {
               //
@@ -35,16 +33,16 @@
               //
               // });
               // TODO CORE Admin can see Survey Question
-              test('admin can see survey card question element is not empty', function(done) {
-                var adminQuestion = userSurveys.querySelector('#questionHere')
-                debugger
-                assert.isFalse(adminQuestion.textContent, '')
-              });
+        test('admin can see survey card question element is not empty', function(done) {
+          var adminQuestion = userSurveys.querySelector('#questionHere')
+          debugger
+          assert.isFalse(adminQuestion.textContent, '')
+        })
               // TODO CORE User can see Survey Question
-              test('user can see survey card element with the question is not empty', function(done) {
-                var userQuestion = userSurveys.querySelector('#ques')
-                assert.isFalse(userQuestion.textContent, '')
-              });
+        test('user can see survey card element with the question is not empty', function(done) {
+          var userQuestion = userSurveys.querySelector('#ques')
+          assert.isFalse(userQuestion.textContent, '')
+        })
 
               // TODO CORE User Answers a Survey and the Data Path Changes
 
@@ -73,9 +71,8 @@
               // TODO Admin cannot see the Survey
 
               // TODO User Cannot See the Survey
-            });
-          });
-        </script>
-
+        })
+      })
+    </script>
   </body>
 </html>
