@@ -19,8 +19,9 @@
         <script>
           suite('<user-surveys>', function () {
             var userSurveys;
-            userSurveys = fixture('userSurveys');
+            
             setup(function () {
+              userSurveys = fixture('userSurveys')
             });
             teardown(function () {
               //...
