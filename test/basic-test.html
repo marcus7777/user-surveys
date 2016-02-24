@@ -25,20 +25,23 @@
               //...
             });
             suite('basic usage', function () {
+
+              var adminQuestion, 
               // TODO CORE Admin Creates a Survey an the Data is Created
-              test('firebase path of survey is created in admin', function(done) {
-
-              });
-              test('firebase path of survey is created in user', function(done) {
-
-              });
+              // test('firebase path of survey is created in admin', function(done) {
+              //
+              // });
+              // test('firebase path of survey is created in user', function(done) {
+              //
+              // });
               // TODO CORE Admin and User can see the Survey
               test('admin can see survey card element with the question and unaswered equal to the number of users and answered equal to 0', function(done) {
-                questionText = userSurveys.querySelector('#questionHere');
-                assert.equal(questionText.textContent, '');
+                adminQuestion = userSurveys.querySelector('#questionHere');
+                assert.isFalse(questionText.textContent, '');
               });
               test('user can see survey card element with the question and the ability to answer', function(done) {
-
+                userQuestion = userSurveys.querySelector('#questionHere');
+                assert.isFalse(questionText.textContent, '');
               });
 
               // TODO CORE User Answers a Survey and the Data Path Changes
