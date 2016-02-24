@@ -12,7 +12,8 @@
 
     <test-fixture id="userSurveys">
           <template>
-            <user-surveys></user-surveys>
+            Edit default <paper-toggle-button checked="{{editDefault}}"></paper-toggle-button> {{editDefault}}
+            <user-surveys edit-default="{{editDefault}}" edit="{{editDefault}}" answer="{{!editDefault}}" folder="marcus7777" location="https://open-elements.firebaseio.com/all/"></user-surveys>
           </template>
         </test-fixture>
         <script>
