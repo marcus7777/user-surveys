@@ -55,7 +55,7 @@
     </template>
     <template is="dom-if" if="{{answer}}">
       <div id="ques" style="margin-bottom: 30px;">
-        [[survey.question]]
+        {{survey.question}}
       </div>
       <span>
          <paper-button style="color:green; font-size:20px; font-weight: 500;" on-tap="yes">{{Yes}}</paper-button>
