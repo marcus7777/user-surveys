@@ -35,6 +35,7 @@
               // TODO CORE Admin can see Survey Question
               test('admin can see survey card question element is not empty', function(done) {
                 var adminQuestion = userSurveys.querySelector('#questionHere')
+                debugger
                 assert.isFalse(adminQuestion.textContent, '')
               });
               // TODO CORE User can see Survey Question
