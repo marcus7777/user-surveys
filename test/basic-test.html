@@ -24,7 +24,7 @@
       teardown(function () {
         //...
       });
-      setTimeout(function(){ suite('basic usage', function () {
+      function timeouted(){ suite('basic usage', function () {
               // TODO CORE Admin Creates a Survey an the Data is Created
               // test('firebase path of survey is created in admin', function(done) {
               //
@@ -43,35 +43,22 @@
           var userQuestion = userSurveys.querySelector('#ques')
           assert.isFalse(userQuestion.textContent, '')
         })
-
               // TODO CORE User Answers a Survey and the Data Path Changes
-
               // TODO CORE Admin Data Path Changes with the Update
-
               // TODO CORE User Survey then Vanishes
-
               // TODO CORE Admin Survey Element Unanswered reduces by 1 and Answered increases by 1
-
               // TODO Admin Archives the Survey and the Admin Path Changes
-
               // TODO Admin Survey Element then show in Archives
-
               // TODO User Data Path Changes
-
               // TODO User Cannot See the Survey Element
-
               // TODO Admin UnArchives the Survey and the Data Path Changes
-
               // TODO Admin can see the Survey Again
-
               // TODO User can see the Survey Again
-
               // TODO Admin Archives and Deletes the Survey so the Data Path Deletes
-
               // TODO Admin cannot see the Survey
-
               // TODO User Cannot See the Survey
-        })}, 3000)
+        })}
+        setTimeout(timeouted.bind(this), 3000)
       })
     </script>
   </body>
