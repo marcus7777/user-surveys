@@ -31,12 +31,10 @@
           setTimeout(timeouted.bind(this, userSurveys), 500)
           function timeouted(){
             debugger
-            MockInteractions.tap(userSurveys.$$("paper-fab"))
+            MockInteractions.tap(userSurveys._nodes[0].$$("survey-input")._nodes[0]) // MockInteractions.tap(userSurveys.$$("paper-fab"))
             assert.isFalse(userSurveys.innerText === '')
             done()
           }
-          debugger
-          MockInteractions.tap(userSurveys.$$("paper-fab"))
         })
         
         test('can be triggered with space', function(done) {
