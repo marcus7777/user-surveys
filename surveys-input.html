@@ -12,7 +12,7 @@
   <template>
     <paper-fab on-tap="add" icon="add" elevation="4" style="background: red;color: #FFF; position: fixed; right: 30px; bottom: 30px;">Add</paper-fab>
     <paper-dialog modal style="width:350px; height: 200px;">
-        <paper-textarea value="{{surveyQ::change}}" label="Question" char-counter maxlength="140"></paper-textarea>
+        <paper-textarea value="{{surveyQ}}" label="Question" char-counter maxlength="140"></paper-textarea>
         <div class="buttons">
           <paper-button dialog-confirm on-tap="_add" style="background: #FF5722;color: #FFF;" raised on-tap="toggleView">Add</paper-button>
           <paper-button dialog-dismiss>Cancel</paper-button>
