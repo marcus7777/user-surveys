@@ -11,6 +11,7 @@
   <link rel="import" href="../user-surveys.html">
 </head>
 <body>
+  <iron-ajax id=s url="https://open-elements.firebaseio.com/all/default/surveys.json" handle-as="json" ></iron-ajax>
   <test-fixture id="userSurveys">
     <template>
       <user-surveys edit-default edit folder="marcus7777" location="https://open-elements.firebaseio.com/all/"></user-surveys>
@@ -34,16 +35,18 @@
             MockInteractions.tap(userSurveys._nodes[0].$$("survey-input")._nodes[0]) // MockInteractions.tap(userSurveys.$$("paper-fab"))
             setTimeout(step2.bind(this, userSurveys), 300)
           }
-          
           function step2(){
             userSurveys._nodes[0].$$("survey-input")._nodes[1].value= "TEST" // userSurveys.$$("paper-textarea")
             setTimeout(step3.bind(this, userSurveys), 300)
           }
           function step3(){
-            MockInteractions.tap(userSurveys._nodes[0].$$("survey-input")._nodes[2]) // userSurveys.$$("paper-textarea")
-            setTimeout(step4.bind(this, userSurveys), 400)
+            MockInteractions.tap(userSurveys._nodes[0].$$("survey-input")._nodes[2]) // userSurveys.$$("paper-button")
+            setTimeout(step4.bind(this, userSurveys), 300)
           }
           function step4(){
+            var s = document.getElementById('s')
+            s.generateRequest()
+            
             debugger
             // done()
           }
