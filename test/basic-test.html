@@ -13,7 +13,7 @@
 <body>
   <test-fixture id="userSurveys">
     <template>
-      <user-surveys id="id" edit-default="true" edit="true" answer="false" folder="marcus7777" location="https://open-elements.firebaseio.com/all/"></user-surveys>
+      <user-surveys edit-default edit folder="marcus7777" location="https://open-elements.firebaseio.com/all/"></user-surveys>
     </template>
   </test-fixture>
   <script>
@@ -34,7 +34,7 @@
             done()
           }
           debugger
-          MockInteractions.tap(userSurveys)
+          MockInteractions.tap(userSurveys.$$("paper-fab"))
         })
         
         test('can be triggered with space', function(done) {
