@@ -29,9 +29,9 @@
       <template is="dom-if" if="{{done}}">
         <h4>Thank you for you time. All Questions Answered.</h4>
       </template>
-      <template is="dom-repeat" items="{{surveys}}" filter="filterSurvey" sort="sortItems">
+      <template is="dom-repeat" items="{{surveys}}" filter="filterSurvey" sort="sortItems" observe="answer">
         <paper-material elevation="1" style="padding:20px;float:left;margin:10px">
-          <div><survey-item index="[[index]]" answer="[[answer]]" answered="[[answered]]" survey="{{item}}"></survey-item></div>
+          <div><survey-item index="{{index}}" answer="{{answer}}" answered="{{answered}}" survey="{{item}}"></survey-item></div>
         </paper-material>
       </template>
     </template>
