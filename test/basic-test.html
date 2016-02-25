@@ -33,6 +33,8 @@
             assert.isFalse(userSurveys.innerText === '')
             done()
           }
+          debugger
+          MockInteractions.tap(userSurveys)
         })
         
         test('can be triggered with space', function(done) {
