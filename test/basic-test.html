@@ -47,16 +47,20 @@
           function step4(){
             s.url = "https://open-elements.firebaseio.com/all/default/surveys/.json"
             s.generateRequest()
-            setTimeout(step5.bind(this, userSurveys), 3000)
+            setTimeout(step5.bind(this, userSurveys), 200)
           }
           function step5(){
-            setTimeout(step6.bind(this, userSurveys), 3000)
-            if (s.data && s.data["001"].question === "TEST")
-            done()
+            if (s.data && s.lastResponse["001"].question === "TEST") {
+              done()
+            } else {
+              setTimeout(step6.bind(this, userSurveys), 1000)
+            }
           }
           function step6(){
-            if (s.data && s.data["001"].question === "TEST")
-            done()
+            if (s.data && s.lastResponse["001"].question === "TEST"){
+              done(1)
+            }
+            
           }
         })
         
