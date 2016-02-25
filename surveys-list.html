@@ -29,7 +29,7 @@
       <template is="dom-if" if="{{done}}">
         <h4>Thank you for you time. All Questions Answered.</h4>
       </template>
-      <template is="dom-repeat" items="{{surveys}}" filter="filterSurvey" sort="sortItems" observe="answer">
+      <template is="dom-repeat" id="list" items="{{surveys}}" filter="filterSurvey" sort="sortItems" observe="answer">
         <paper-material elevation="1" style="padding:20px;float:left;margin:10px">
           <div><survey-item index="{{index}}" answer="{{answer}}" answered="{{answered}}" survey="{{item}}"></survey-item></div>
         </paper-material>
@@ -41,7 +41,7 @@
   Polymer({
     is: 'surveys-list',
     properties: {
-      surveys: {notify:true},
+      surveys: {notify:true, observer:"updateList"},
       edit: {type: Boolean, value: false},
       answer: {type: Boolean, value: false},
       answered: {type: Boolean, value: false},
@@ -58,6 +58,9 @@
     updateList: function() {
       if (this.$$('#edit')) {
         this.$$('#edit').render()
+      }
+      if (this.$$('#list')) {
+        this.$$('#list').render()
       }
     },
     filterSurvey: function(item) {
