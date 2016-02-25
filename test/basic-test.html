@@ -28,6 +28,7 @@
         //...
       });
       suite('basic usage', function () {
+        var s = document.getElementById('s')
         // TODO CORE
         test('Admin Creates a Survey an the Data is Created', function(done) {
           setTimeout(step1.bind(this, userSurveys), 300)
@@ -44,11 +45,12 @@
             setTimeout(step4.bind(this, userSurveys), 300)
           }
           function step4(){
-            var s = document.getElementById('s')
-            s.generateRequest()
-            
-            debugger
-            // done()
+            s.generateRequest() 
+            setTimeout(step5.bind(this, userSurveys), 600)
+          }
+          function step5(){
+            console.log(s)
+            setTimeout(step6.bind(this, userSurveys), 600)
           }
         })
         
