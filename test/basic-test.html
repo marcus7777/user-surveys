@@ -37,9 +37,9 @@
         
         test('can be triggered with space', function(done) {
           userSurveys.addEventListener('click', function() {
-            done();
-          });
-          MockInteractions.pressSpace(button);
+            done()
+          })
+          MockInteractions.pressSpace(userSurveys)
         });
         
         // test('firebase path of survey is created in user', function(done) {
