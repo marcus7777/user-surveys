@@ -7,7 +7,7 @@
     "polymer","web-components"
   ],
   "dependencies": {
-    "polymer": "*",
+    "polymer": "Polymer/polymer#^1.2.0",
     "show-once":"marcus7777/show-once",
     "mediator-data":"marcus7777/mediator-data",
     "paper-material":"PolymerElements/paper-material",
