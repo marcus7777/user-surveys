@@ -41,7 +41,7 @@
   Polymer({
     is: 'surveys-list',
     properties: {
-      surveys: {notify:true, observer:"updateList"},
+      surveys: {notify:true},
       edit: {type: Boolean, value: false},
       answer: {type: Boolean, value: false},
       answered: {type: Boolean, value: false},
@@ -49,6 +49,9 @@
       showArchive: {observer:"updateList"},
       done: {computed:"getDone(surveys)"}
     },
+    observers: [
+      "updateList(surveys.*)"
+    ],
     getDone: function(surveys) {
       return surveys.length === 0
     },
