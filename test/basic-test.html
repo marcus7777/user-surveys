@@ -30,6 +30,8 @@
         test('Admin Creates a Survey an the Data is Created', function(done) {
           setTimeout(timeouted.bind(this, userSurveys), 500)
           function timeouted(){
+            debugger
+            MockInteractions.tap(userSurveys.$$("paper-fab"))
             assert.isFalse(userSurveys.innerText === '')
             done()
           }
