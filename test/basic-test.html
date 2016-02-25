@@ -40,7 +40,6 @@
             setTimeout(step3.bind(this, userSurveys), 300)
           }
           function step3(){
-            debugger
             MockInteractions.tap(userSurveys._nodes[0].$$("survey-input")._nodes[2]) // userSurveys.$$("paper-textarea")
             setTimeout(step4.bind(this, userSurveys), 400)
           }
