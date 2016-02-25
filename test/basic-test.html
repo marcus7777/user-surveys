@@ -28,12 +28,14 @@
       suite('basic usage', function () {
         // TODO CORE
         test('Admin Creates a Survey an the Data is Created', function(done) {
-          setTimeout(timeouted.bind(this, userSurveys), 500)
-          function timeouted(){
+          setTimeout(step1.bind(this, userSurveys), 300)
+          function step1(){
+            MockInteractions.tap(userSurveys._nodes[0].$$("survey-input")._nodes[0]) // MockInteractions.tap(userSurveys.$$("paper-fab"))
+          }
+          setTimeout(step2.bind(this, userSurveys), 600)
+          function step2(){
             debugger
             MockInteractions.tap(userSurveys._nodes[0].$$("survey-input")._nodes[0]) // MockInteractions.tap(userSurveys.$$("paper-fab"))
-            assert.isFalse(userSurveys.innerText === '')
-            done()
           }
         })
         
