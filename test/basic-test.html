@@ -11,7 +11,7 @@
   <link rel="import" href="../user-surveys.html">
 </head>
 <body>
-  <iron-ajax id=s url="https://open-elements.firebaseio.com/all/default/surveys.json" handle-as="json" ></iron-ajax>
+  <iron-ajax auto id="s" handle-as="json" ></iron-ajax>
   <test-fixture id="userSurveys">
     <template>
       <user-surveys edit-default edit folder="marcus7777" location="https://open-elements.firebaseio.com/all/"></user-surveys>
@@ -45,11 +45,10 @@
             setTimeout(step4.bind(this, userSurveys), 300)
           }
           function step4(){
-            s.generateRequest() 
+            s.url="https://open-elements.firebaseio.com/all/default/surveys.json"
             setTimeout(step5.bind(this, userSurveys), 3000)
           }
           function step5(){
-            s.generateRequest() 
             setTimeout(step6.bind(this, userSurveys), 3000)
             if (s.data && s.data["001"].question === "TEST")
             done()
