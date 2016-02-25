@@ -41,12 +41,12 @@
           }
           function step3(){
             debugger
-            MockInteractions.tap(userSurveys._nodes[0].$$("survey-input")._nodes[0]) // userSurveys.$$("paper-textarea")
-            setTimeout(step4.bind(this, userSurveys), 300)
+            MockInteractions.tap(userSurveys._nodes[0].$$("survey-input")._nodes[2]) // userSurveys.$$("paper-textarea")
+            setTimeout(step4.bind(this, userSurveys), 400)
           }
           function step4(){
-            userSurveys._nodes[0].$$("survey-input")._nodes[1].value= "TEST" // userSurveys.$$("paper-textarea")
-            setTimeout(step5.bind(this, userSurveys), 300)
+            debugger
+            done()
           }
         })
         
