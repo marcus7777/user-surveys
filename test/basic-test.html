@@ -18,7 +18,7 @@
     </template>
   </test-fixture>
   <script>
-
+ var s
     suite('<user-surveys>', function () {
       var userSurveys;
       setup(function () {
@@ -28,7 +28,7 @@
         //...
       });
       suite('basic usage', function () {
-        var s = document.getElementById('s')
+        s = document.getElementById('s')
         // TODO CORE
         test('Admin Creates a Survey an the Data is Created', function(done) {
           setTimeout(step1.bind(this, userSurveys, done), 300)
