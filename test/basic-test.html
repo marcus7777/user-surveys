@@ -53,12 +53,7 @@
             if (s.lastResponse && s.lastResponse["001"].question === "TEST") {
               done()
             } else {
-              setTimeout(step6.bind(this, userSurveys, done), 300)
-            }
-          }
-          function step6(){
-            if (s.lastResponse && s.lastResponse["001"].question === "TEST"){
-              done()
+              setTimeout(step5.bind(this, userSurveys, done), 200)
             }
           }
         })
