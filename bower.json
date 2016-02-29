@@ -4,20 +4,24 @@
   "description": "user-surveys",
   "main": "user-surveys.html",
   "keywords": [
-    "polymer","web-components"
+    "polymer",
+    "web-components"
   ],
   "dependencies": {
-    "polymer": "*",
-    "show-once":"marcus7777/show-once",
-    "mediator-data":"marcus7777/mediator-data",
-    "paper-material":"PolymerElements/paper-material",
-    "paper-icon-button":"PolymerElements/paper-icon-button",
-    "paper-toggle-button":"PolymerElements/paper-toggle-button",
-    "paper-button":"PolymerElements/paper-button",
-    "paper-input":"PolymerElements/paper-input",
-    "paper-dialog":"PolymerElements/paper-dialog",
-    "paper-fab":"PolymerElements/paper-fab",
-    "iron-ajax":"PolymerElements/iron-ajax",
-    "sortable-list":"marcus7777/sortable-list"
+    "polymer": "Polymer/polymer#^1.3.0",
+    "show-once": "marcus7777/show-once",
+    "mediator-data": "marcus7777/mediator-data",
+    "paper-material": "PolymerElements/paper-material",
+    "paper-icon-button": "PolymerElements/paper-icon-button",
+    "paper-toggle-button": "PolymerElements/paper-toggle-button",
+    "paper-button": "PolymerElements/paper-button",
+    "paper-input": "PolymerElements/paper-input",
+    "paper-dialog": "PolymerElements/paper-dialog",
+    "paper-fab": "PolymerElements/paper-fab",
+    "iron-ajax": "PolymerElements/iron-ajax",
+    "sortable-list": "marcus7777/sortable-list"
+  },
+  "resolutions": {
+    "polymer": "^1.3.0"
   }
 }
