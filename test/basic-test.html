@@ -25,7 +25,7 @@
       
       setup(function () {
         userSurveysFixture = fixture('userSurveys')
-        userSurveys = Polymer.dom(userSurveysFixture.root)
+        userSurveys = Polymer.dom(userSurveysFixture).parentNode.querySelector("user-surveys")
       })
       teardown(function () {
         //...
