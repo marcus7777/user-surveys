@@ -5,7 +5,8 @@
   "main": "user-surveys.html",
   "keywords": [
     "polymer",
-    "web-components"
+    "web-components",
+    "surveys"
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.3.0",
