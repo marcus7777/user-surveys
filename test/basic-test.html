@@ -19,13 +19,12 @@
   </test-fixture>
   <script>
     var s
+    var stepTiming = 200
     suite('<user-surveys>', function () {
-      var userSurveysFixture
       var userSurveys
       
       setup(function () {
-        userSurveysFixture = fixture('userSurveys')
-        userSurveys = Polymer.dom(userSurveysFixture).parentNode.querySelector("user-surveys")
+        userSurveys = fixture('userSurveys')
       })
       teardown(function () {
         //...
@@ -33,34 +32,48 @@
       suite('basic usage', function () {
         s = document.getElementById('s')
         // TODO CORE
-        test('Admin Creates a Survey an the Data is Created', function(done) {
-          setTimeout(step1.bind(userSurveys, done), 300)
+        test('firebase is available', function(done) {
+          setTimeout(step1.bind(this, userSurveys, done), stepTiming)
           function step1(){
-            MockInteractions.tap(userSurveys.$$("paper-fab"))
-            setTimeout(step2.bind(userSurveys, done), 300)
+            s.url = "https://open-elements.firebaseio.com/all/default/surveys/ggcchgcghcghch.json"
+            s.generateRequest()
+            setTimeout(step2.bind(this, done), stepTiming)
           }
           function step2(){
-            userSurveys.$$("paper-textarea").value= "TEST"
-            setTimeout(step3.bind(userSurveys, done), 300)
+            if (s.lastResponse === null && !s.lastError ) {
+              done()
+            } else {
+              setTimeout(step2.bind(this, done), stepTiming/2)
+            }
+          }
+        })
+        test('Admin Creates a Survey an the Data is Created', function(done) {
+          setTimeout(step1.bind(this, userSurveys, done), stepTiming)
+          function step1(){
+            MockInteractions.tap(userSurveys.querySelector("survey-input paper-fab"))
+            setTimeout(step2.bind(this, userSurveys, done), stepTiming)
+          }
+          function step2(){
+            userSurveys.querySelector("paper-textarea").value= "TEST"
+            setTimeout(step3.bind(this, userSurveys, done), stepTiming)
           }
           function step3(){
-            MockInteractions.tap(userSurveys.$$("paper-button")) // userSurveys.$$("paper-button")
-            setTimeout(step4.bind(userSurveys, done), 300)
+            MockInteractions.tap(userSurveys.querySelector("paper-button")) // userSurveys.$$("paper-button")
+            setTimeout(step4.bind(this, userSurveys, done), stepTiming)
           }
           function step4(){
             s.url = "https://open-elements.firebaseio.com/all/default/surveys/.json"
             s.generateRequest()
-            setTimeout(step5.bind(done), 300)
+            setTimeout(step5.bind(this, done), stepTiming)
           }
           function step5(){
             if (s.lastResponse && s.lastResponse["001"].question === "TEST") {
               done()
             } else {
-              setTimeout(step5.bind(done), 200)
+              setTimeout(step5.bind(this, done), stepTiming/2)
             }
           }
         })
-        
         // test('firebase path of survey is created in user', function(done) {
         //
         // });
