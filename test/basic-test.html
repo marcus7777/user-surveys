@@ -40,7 +40,7 @@
             setTimeout(step2.bind(this, done), stepTiming)
           }
           function step2(){
-            if (s.lastResponse) {
+            if (s.lastResponse === null && !s.lastError ) {
               done()
             } else {
               setTimeout(step2.bind(this, done), stepTiming/2)
