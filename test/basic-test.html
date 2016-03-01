@@ -32,6 +32,21 @@
       suite('basic usage', function () {
         s = document.getElementById('s')
         // TODO CORE
+        test('firebase is available', function(done) {
+          setTimeout(step1.bind(this, userSurveys, done), stepTiming)
+          function step1(){
+            s.url = "https://open-elements.firebaseio.com/all/default/surveys/ggcchgcghcghch.json"
+            s.generateRequest()
+            setTimeout(step5.bind(this, done), stepTiming)
+          }
+          function step2(){
+            if (s.lastResponse) {
+              done()
+            } else {
+              setTimeout(step2.bind(this, done), stepTiming/2)
+            }
+          }
+        })
         test('Admin Creates a Survey an the Data is Created', function(done) {
           setTimeout(step1.bind(this, userSurveys, done), stepTiming)
           function step1(){
@@ -59,7 +74,6 @@
             }
           }
         })
-        
         // test('firebase path of survey is created in user', function(done) {
         //
         // });
