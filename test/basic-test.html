@@ -25,7 +25,7 @@
       
       setup(function () {
         userSurveysFixture = fixture('userSurveys')
-        userSurveys = Polymer.dom(userSurveysFixture.root)
+        userSurveys = Polymer.dom(userSurveysFixture).parentNode.querySelector("user-surveys")
       })
       teardown(function () {
         //...
@@ -34,29 +34,29 @@
         s = document.getElementById('s')
         // TODO CORE
         test('Admin Creates a Survey an the Data is Created', function(done) {
-          setTimeout(step1.bind(this, userSurveys, done), 300)
+          setTimeout(step1.bind(userSurveys, done), 300)
           function step1(){
             MockInteractions.tap(userSurveys.$$("paper-fab"))
-            setTimeout(step2.bind(this, userSurveys, done), 300)
+            setTimeout(step2.bind(userSurveys, done), 300)
           }
           function step2(){
             userSurveys.$$("paper-textarea").value= "TEST"
-            setTimeout(step3.bind(this, userSurveys, done), 300)
+            setTimeout(step3.bind(userSurveys, done), 300)
           }
           function step3(){
             MockInteractions.tap(userSurveys.$$("paper-button")) // userSurveys.$$("paper-button")
-            setTimeout(step4.bind(this, userSurveys, done), 300)
+            setTimeout(step4.bind(userSurveys, done), 300)
           }
           function step4(){
             s.url = "https://open-elements.firebaseio.com/all/default/surveys/.json"
             s.generateRequest()
-            setTimeout(step5.bind(this, userSurveys, done), 300)
+            setTimeout(step5.bind(done), 300)
           }
           function step5(){
             if (s.lastResponse && s.lastResponse["001"].question === "TEST") {
               done()
             } else {
-              setTimeout(step5.bind(this, userSurveys, done), 200)
+              setTimeout(step5.bind(done), 200)
             }
           }
         })
