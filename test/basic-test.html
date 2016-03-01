@@ -24,8 +24,7 @@
       var userSurveys
       
       setup(function () {
-        userSurveysFixture = fixture('userSurveys')
-        userSurveys = Polymer.dom(userSurveysFixture).parentNode.querySelector("user-surveys")
+        userSurveys = fixture('userSurveys')
       })
       teardown(function () {
         //...
@@ -36,15 +35,15 @@
         test('Admin Creates a Survey an the Data is Created', function(done) {
           setTimeout(step1.bind(userSurveys, done), 300)
           function step1(){
-            MockInteractions.tap(userSurveys.$$("paper-fab"))
+            MockInteractions.tap(userSurveys.querySelector("survey-input paper-fab"))
             setTimeout(step2.bind(userSurveys, done), 300)
           }
           function step2(){
-            userSurveys.$$("paper-textarea").value= "TEST"
+            userSurveys.querySelector("paper-textarea").value= "TEST"
             setTimeout(step3.bind(userSurveys, done), 300)
           }
           function step3(){
-            MockInteractions.tap(userSurveys.$$("paper-button")) // userSurveys.$$("paper-button")
+            MockInteractions.tap(userSurveys.querySelector("paper-button")) // userSurveys.$$("paper-button")
             setTimeout(step4.bind(userSurveys, done), 300)
           }
           function step4(){
