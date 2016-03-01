@@ -18,12 +18,15 @@
     </template>
   </test-fixture>
   <script>
- var s
+    var s
     suite('<user-surveys>', function () {
-      var userSurveys;
+      var userSurveysFixture
+      var userSurveys
+      
       setup(function () {
-        userSurveys = fixture('userSurveys')
-      });
+        userSurveysFixture = fixture('userSurveys')
+        userSurveys = Polymer.dom(userSurveysFixture.root)
+      })
       teardown(function () {
         //...
       });
@@ -33,15 +36,15 @@
         test('Admin Creates a Survey an the Data is Created', function(done) {
           setTimeout(step1.bind(this, userSurveys, done), 300)
           function step1(){
-            MockInteractions.tap(userSurveys._nodes[0].$$("survey-input")._nodes[0]) // MockInteractions.tap(userSurveys.$$("paper-fab"))
+            MockInteractions.tap(userSurveys.$$("paper-fab"))
             setTimeout(step2.bind(this, userSurveys, done), 300)
           }
           function step2(){
-            userSurveys._nodes[0].$$("survey-input")._nodes[1].value= "TEST" // userSurveys.$$("paper-textarea")
+            userSurveys.$$("paper-textarea").value= "TEST"
             setTimeout(step3.bind(this, userSurveys, done), 300)
           }
           function step3(){
-            MockInteractions.tap(userSurveys._nodes[0].$$("survey-input")._nodes[2]) // userSurveys.$$("paper-button")
+            MockInteractions.tap(userSurveys.$$("paper-button")) // userSurveys.$$("paper-button")
             setTimeout(step4.bind(this, userSurveys, done), 300)
           }
           function step4(){
