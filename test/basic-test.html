@@ -107,7 +107,7 @@
         s = document.getElementById('s')
         // TODO CORE
         test('firebase is available', function(done) {
-          setTimeout(step1.bind(this, userSurveysAdmin, done), stepTiming)
+          setTimeout(step1.bind(this, done), stepTiming)
           function step1(){
             s.url = "https://open-elements.firebaseio.com/all/default/surveys/ggcchgcghcghch.json"
             s.generateRequest()
@@ -125,10 +125,10 @@
         // TODO CORE User can see Survey Question
         
 
-        //test('user can see survey card element with the question is not empty', function(done) {
-        //  var userQuestion = userSurveysAdmin.querySelector('#ques')
-        //  assert.isFalse(userQuestion.textContent, '')
-        //})
+        test('user can see survey card element with the question is not empty', function(done) {
+          var userQuestion = userSurveysUser.querySelector('#ques')
+          assert.isFalse(userQuestion.textContent, '')
+        })
         // TODO CORE User Answers a Survey and the Data Path Changes
         // TODO CORE User Survey then Vanishes
         
