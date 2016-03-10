@@ -12,28 +12,34 @@
 </head>
 <body>
   <iron-ajax auto id="s" handle-as="json" ></iron-ajax>
-  <test-fixture id="userSurveys">
+  <test-fixture id="userSurveysAdmin">
     <template>
       <user-surveys edit-default edit folder="marcus7777" location="https://open-elements.firebaseio.com/all/"></user-surveys>
+    </template>
+  </test-fixture>
+  <test-fixture id="userSurveysUser">
+    <template>
+      <user-surveys answer folder="marcus7777" location="https://open-elements.firebaseio.com/all/"></user-surveys>
     </template>
   </test-fixture>
   <script>
     var s
     var stepTiming = 200
     suite('<user-surveys>', function () {
-      var userSurveys
+      var userSurveysAdmin
       
       setup(function () {
-        userSurveys = fixture('userSurveys')
+        userSurveysUser = fixture('userSurveysUser')
+        userSurveysAdmin = fixture('userSurveysAdmin')
       })
       teardown(function () {
         //...
-      });
-      suite('basic usage', function () {
+      })
+      suite('basic usage Admin', function () {
         s = document.getElementById('s')
         // TODO CORE
         test('firebase is available', function(done) {
-          setTimeout(step1.bind(this, userSurveys, done), stepTiming)
+          setTimeout(step1.bind(this, userSurveysAdmin, done), stepTiming)
           function step1(){
             s.url = "https://open-elements.firebaseio.com/all/default/surveys/ggcchgcghcghch.json"
             s.generateRequest()
@@ -48,18 +54,18 @@
           }
         })
         test('Admin Creates a Survey an the Data is Created', function(done) {
-          setTimeout(step1.bind(this, userSurveys, done), stepTiming)
+          setTimeout(step1.bind(this, userSurveysAdmin, done), stepTiming)
           function step1(){
-            MockInteractions.tap(userSurveys.querySelector("survey-input paper-fab"))
-            setTimeout(step2.bind(this, userSurveys, done), stepTiming)
+            MockInteractions.tap(userSurveysAdmin.querySelector("survey-input paper-fab"))
+            setTimeout(step2.bind(this, userSurveysAdmin, done), stepTiming)
           }
           function step2(){
-            userSurveys.querySelector("paper-textarea").value= "TEST"
-            setTimeout(step3.bind(this, userSurveys, done), stepTiming)
+            userSurveysAdmin.querySelector("paper-textarea").value= "TEST"
+            setTimeout(step3.bind(this, userSurveysAdmin, done), stepTiming)
           }
           function step3(){
-            MockInteractions.tap(userSurveys.querySelector("paper-button")) // userSurveys.$$("paper-button")
-            setTimeout(step4.bind(this, userSurveys, done), stepTiming)
+            MockInteractions.tap(userSurveysAdmin.querySelector("paper-button")) // userSurveysAdmin.$$("paper-button")
+            setTimeout(step4.bind(this, userSurveysAdmin, done), stepTiming)
           }
           function step4(){
             s.url = "https://open-elements.firebaseio.com/all/default/surveys/.json"
@@ -80,33 +86,57 @@
         // TODO CORE Admin can see Survey Question
         
         test('admin can see user-survey element is not empty', function(done) {
-          setTimeout(timeouted.bind(this, userSurveys), 100)
+          setTimeout(timeouted.bind(this, userSurveysAdmin), 100)
           function timeouted(){
-            assert.isFalse(userSurveys.innerText === '')
+            assert.isFalse(userSurveysAdmin.innerText === '')
             done()
           }
         })
+        // TODO CORE Admin Data Path Changes with the Update
+        // TODO CORE Admin Survey Element Unanswered reduces by 1 and Answered increases by 1
+        
+
+        // TODO Admin Archives the Survey and the Admin Path Changes
+        // TODO Admin Survey Element then show in Archives
+        // TODO Admin UnArchives the Survey and the Data Path Changes
+        // TODO Admin can see the Survey Again
+        // TODO Admin Archives and Deletes the Survey so the Data Path Deletes
+        // TODO Admin cannot see the Survey
+      })
+      suite('basic usage User', function () {
+        s = document.getElementById('s')
+        // TODO CORE
+        test('firebase is available', function(done) {
+          setTimeout(step1.bind(this, userSurveysAdmin, done), stepTiming)
+          function step1(){
+            s.url = "https://open-elements.firebaseio.com/all/default/surveys/ggcchgcghcghch.json"
+            s.generateRequest()
+            setTimeout(step2.bind(this, done), stepTiming)
+          }
+          function step2(){
+            if (s.lastResponse === null && !s.lastError ) {
+              done()
+            } else {
+              setTimeout(step2.bind(this, done), stepTiming/2)
+            }
+          }
+        })
+
         // TODO CORE User can see Survey Question
+        
+
         //test('user can see survey card element with the question is not empty', function(done) {
-        //  var userQuestion = userSurveys.querySelector('#ques')
+        //  var userQuestion = userSurveysAdmin.querySelector('#ques')
         //  assert.isFalse(userQuestion.textContent, '')
         //})
         // TODO CORE User Answers a Survey and the Data Path Changes
-        // TODO CORE Admin Data Path Changes with the Update
         // TODO CORE User Survey then Vanishes
-        // TODO CORE Admin Survey Element Unanswered reduces by 1 and Answered increases by 1
         
         // TODO CORE user gets new survey when a survey is added falling
         
-        // TODO Admin Archives the Survey and the Admin Path Changes
-        // TODO Admin Survey Element then show in Archives
         // TODO User Data Path Changes
         // TODO User Cannot See the Survey Element  
-        // TODO Admin UnArchives the Survey and the Data Path Changes
-        // TODO Admin can see the Survey Again
         // TODO User can see the Survey Again
-        // TODO Admin Archives and Deletes the Survey so the Data Path Deletes
-        // TODO Admin cannot see the Survey
         // TODO User Cannot See the Survey
       })
     })
